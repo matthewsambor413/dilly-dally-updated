@@ -1,0 +1,1321 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Dilly Dally Fair — August 2026, New York</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,400&family=JetBrains+Mono:wght@300;400;500;700&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<style>
+:root{
+  --paper: #f1ebdd;
+  --paper-2: #e8e0cc;
+  --ink: #161412;
+  --ink-soft: #3a342e;
+  --vermilion: #d94a1f;
+  --vermilion-deep: #b23a17;
+  --cool: #4a6b7a;
+  --rule: rgba(22,20,18,.55);
+  --grain: 0.06;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--paper);color:var(--ink);font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased}
+
+/* PAPER GRAIN + SUBTLE TEXTURE */
+body{
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(217,74,31,.05), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(74,107,122,.06), transparent 60%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.09 0 0 0 0 0.08 0 0 0 0 0.07 0 0 0 0.18 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.7'/></svg>");
+  background-size: auto, auto, 240px 240px;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:120;
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,.12), transparent 18%, transparent 82%, rgba(0,0,0,.14)),
+    radial-gradient(ellipse at center, transparent 55%, rgba(22,20,18,.18));
+  mix-blend-mode:multiply;
+}
+
+/* MONO & DISPLAY */
+.mono{font-family:'JetBrains Mono',monospace;letter-spacing:.02em}
+.display{font-family:'Bodoni Moda',serif;font-weight:900;font-style:italic;letter-spacing:-.02em;line-height:.88}
+.hand{font-family:'Caveat',cursive;font-weight:600}
+
+/* =============== NAV =============== */
+nav.topbar{
+  position:sticky;top:0;z-index:80;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 28px;
+  background:rgba(241,235,221,.82);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--rule);
+  font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.12em;
+}
+nav.topbar .brand{display:flex;align-items:center;gap:10px;font-weight:500}
+nav.topbar .brand .dot{width:9px;height:9px;background:var(--vermilion);border-radius:50%;display:inline-block}
+nav.topbar ul{display:flex;gap:22px;list-style:none}
+nav.topbar a{color:var(--ink);text-decoration:none;position:relative;padding:4px 0}
+nav.topbar a:hover{color:var(--vermilion)}
+nav.topbar a.active::before{content:"";position:absolute;left:-10px;top:50%;width:5px;height:5px;background:var(--vermilion);transform:translateY(-50%) rotate(45deg)}
+nav.topbar .stamp{display:flex;align-items:center;gap:10px}
+nav.topbar .stamp .blink{width:7px;height:7px;background:var(--vermilion);border-radius:50%;animation:blink 1.8s infinite}
+@keyframes blink{0%,60%{opacity:1}61%,100%{opacity:.2}}
+
+/* =============== TICKER =============== */
+.ticker{overflow:hidden;border-bottom:1px solid var(--rule);background:var(--ink);color:var(--paper);padding:7px 0;position:sticky;top:46px;z-index:70}
+.ticker-track{display:flex;gap:44px;white-space:nowrap;animation:slide 42s linear infinite;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase}
+.ticker-track span{display:inline-flex;align-items:center;gap:18px}
+.ticker-track span::after{content:"✹";color:var(--vermilion);margin-left:18px}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* =============== HERO / POSTER =============== */
+.poster{
+  position:relative;
+  max-width:1440px;margin:0 auto;
+  padding: 48px 40px 60px;
+}
+.poster .crosshairs{position:absolute;inset:28px;pointer-events:none;}
+.poster .crosshairs::before,.poster .crosshairs::after{
+  content:"";position:absolute;background:var(--rule);
+}
+.poster .crosshairs::before{top:0;bottom:0;left:50%;width:1px;opacity:.15}
+.poster .crosshairs::after{left:0;right:0;top:50%;height:1px;opacity:.15}
+
+.poster .corner{position:absolute;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft)}
+.poster .corner.tl{top:18px;left:40px}
+.poster .corner.tr{top:18px;right:40px;text-align:right}
+.poster .corner.bl{bottom:18px;left:40px}
+.poster .corner.br{bottom:18px;right:40px;text-align:right}
+
+/* headline layout */
+.hero-grid{
+  position:relative;
+  display:grid;grid-template-columns: 1.1fr .9fr;gap:28px;
+  margin-top:46px;
+  min-height: 620px;
+}
+.hero-title{position:relative;z-index:3}
+.hero-title .eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:10px;padding:5px 10px;border:1px solid var(--ink);border-radius:2px;
+  background:var(--paper);
+}
+.hero-title .eyebrow .sq{width:8px;height:8px;background:var(--vermilion)}
+.hero-title h1{
+  font-family:'Bodoni Moda',serif;font-weight:900;
+  font-size: clamp(80px, 11vw, 168px);
+  line-height:.82;letter-spacing:-.035em;margin-top:22px;
+  color:var(--ink);
+}
+.hero-title h1 .line1{display:block}
+.hero-title h1 .line2{display:block;font-style:italic;color:var(--vermilion);margin-left:.25em}
+.hero-title h1 .amp{font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;color:var(--ink-soft);font-size:.55em;vertical-align:.25em}
+.hero-title .strike{position:relative;display:inline-block}
+.hero-title .strike::after{
+  content:"";position:absolute;left:-4%;right:-4%;top:55%;height:9px;background:var(--vermilion);
+  transform:rotate(-2deg);mix-blend-mode:multiply;opacity:.92;border-radius:1px;
+}
+.presented-by{display:flex;align-items:center;gap:14px;margin-top:26px;padding-top:18px;border-top:1px solid var(--rule);max-width:520px}
+.presented-by .pb-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap}
+.presented-by .pb-logo{font-family:'Archivo Black','Helvetica Neue',sans-serif;font-weight:900;font-size:30px;letter-spacing:-.02em;color:var(--ink);line-height:1;transform:scaleX(1.05);transform-origin:left center}
+
+.hero-meta{
+  margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:640px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.05em;
+}
+.hero-meta .cell{border-top:1px solid var(--ink);padding-top:10px}
+.hero-meta .cell .k{text-transform:uppercase;font-size:10px;letter-spacing:.18em;color:var(--ink-soft);margin-bottom:6px}
+.hero-meta .cell .v{font-size:15px;line-height:1.25}
+.hero-meta .cell .v.big{font-size:22px;font-family:'Bodoni Moda',serif;font-style:italic;font-weight:700;letter-spacing:-.02em}
+
+.hero-ctas{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:14px 20px;border:1px solid var(--ink);
+  background:var(--paper);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:11px;
+  letter-spacing:.2em;text-transform:uppercase;cursor:pointer;text-decoration:none;
+  transition:transform .15s ease, background .15s ease, color .15s ease;
+  border-radius:2px;
+}
+.btn:hover{background:var(--ink);color:var(--paper);transform:translate(-2px,-2px)}
+.btn.primary{background:var(--vermilion);color:var(--paper);border-color:var(--vermilion)}
+.btn.primary:hover{background:var(--ink);border-color:var(--ink)}
+.btn .arr{display:inline-block;transition:transform .2s ease}
+.btn:hover .arr{transform:translateX(3px)}
+
+/* COLLAGE CANVAS */
+.collage{position:relative}
+.piece{position:absolute;transform-origin:center}
+.piece img{display:block;width:100%;height:auto}
+#collage .piece .cap{display:none}
+.piece.paper{
+  box-shadow: 0 10px 26px rgba(0,0,0,.22), 0 2px 0 rgba(0,0,0,.04);
+  background:#fff;padding:6px;
+}
+.piece.tape::before{
+  content:"";position:absolute;left:50%;top:-10px;transform:translateX(-50%) rotate(-3deg);
+  width:66px;height:18px;background:rgba(217,74,31,.35);border:1px dashed rgba(0,0,0,.15);
+  box-shadow:0 1px 0 rgba(0,0,0,.08);
+}
+.piece .cap{
+  position:absolute;left:8px;bottom:-26px;font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);
+  background:var(--paper);padding:3px 6px;border:1px solid var(--ink);
+}
+/* shapes */
+.shape{position:absolute;pointer-events:none}
+.shape.circle{border:3px solid var(--vermilion);border-radius:50%}
+.shape.disk{background:var(--vermilion);border-radius:50%;mix-blend-mode:multiply}
+.shape.line{background:var(--ink);height:1px;transform-origin:left center}
+.shape.thick{height:6px;background:var(--vermilion)}
+
+.scribble{position:absolute;pointer-events:none}
+.scribble.arrow{color:var(--vermilion)}
+.hand-label{position:absolute;font-family:'Caveat',cursive;font-weight:600;font-size:22px;color:var(--ink);pointer-events:none}
+.hand-label .pink{color:var(--vermilion)}
+
+/* Marquee BIG WORD strip */
+.big-word{
+  position:relative;margin-top: 80px;
+  padding:28px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);
+  overflow:hidden;
+}
+.big-word-track{display:flex;gap:64px;white-space:nowrap;animation:slide 60s linear infinite;font-family:'Bodoni Moda',serif;font-style:italic;font-weight:900;font-size: clamp(70px, 11vw, 160px);letter-spacing:-.03em;line-height:1}
+.big-word-track .unit{display:inline-flex;align-items:center;gap:40px}
+.big-word-track .unit .star{font-size:.5em;color:var(--vermilion);font-style:normal;font-family:'JetBrains Mono',monospace}
+.big-word-track .outline{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+
+/* =============== SECTION SCAFFOLD =============== */
+section.block{position:relative;max-width:1440px;margin:0 auto;padding:120px 40px}
+.section-head{display:grid;grid-template-columns:120px 1fr auto;gap:20px;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:18px;margin-bottom:48px}
+.section-head:has(.num:empty){grid-template-columns:1fr auto}
+.section-head:has(.num:empty) .num{display:none}
+.section-head .num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
+.section-head h2{font-family:'Bodoni Moda',serif;font-style:italic;font-weight:900;font-size:clamp(40px,5vw,72px);line-height:.95;letter-spacing:-.025em;color:var(--ink)}
+.section-head h2 .accent{color:var(--vermilion)}
+.section-head .tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
+
+/* =============== MANIFESTO =============== */
+.manifesto{display:grid;grid-template-columns: 1.2fr 1fr;gap:60px;align-items:start}
+.manifesto .lead{font-family:'Bodoni Moda',serif;font-weight:400;font-style:italic;font-size:clamp(26px,2.6vw,40px);line-height:1.2;letter-spacing:-.01em;color:var(--ink);text-wrap:pretty;margin-top:-0.22em}
+.manifesto .lead em{color:var(--vermilion);font-style:italic}
+.manifesto .lead .hlight{background:linear-gradient(transparent 60%, rgba(217,74,31,.3) 60%)}
+.manifesto .body{font-size:14px;line-height:1.7;color:var(--ink-soft);max-width:44ch}
+.manifesto .body p+p{margin-top:16px}
+.manifesto .sign{margin-top:22px;font-family:'Caveat',cursive;font-size:26px;color:var(--vermilion)}
+.manifesto .sign small{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-soft);letter-spacing:.15em;text-transform:uppercase;margin-top:4px}
+
+/* =============== WHAT / FACTS =============== */
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.facts .f{padding:26px 22px;border-right:1px solid var(--ink);position:relative}
+.facts .f:last-child{border-right:0}
+.facts .f .n{font-family:'Bodoni Moda',serif;font-weight:900;font-size:54px;line-height:1;letter-spacing:-.02em}
+.facts .f .n.red,.facts .f .n .red{color:var(--vermilion)}
+.facts .f .n .red{font-weight:900;font-size:1.05em;display:inline-block;margin-left:.04em;-webkit-text-stroke:1.5px var(--vermilion)}
+.facts .f .l{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-top:10px}
+.facts .f .d{font-size:12px;margin-top:6px;color:var(--ink);line-height:1.5}
+
+/* =============== MAKERS =============== */
+.makers{position:relative}
+.maker-grid{display:none}
+.makers-placeholder{position:relative;border:1px solid var(--ink);background:
+  repeating-linear-gradient(135deg, transparent 0 22px, rgba(22,20,18,.04) 22px 23px);
+  padding:80px 60px;overflow:hidden}
+.makers-placeholder::before{content:"";position:absolute;inset:8px;border:1px dashed rgba(22,20,18,.25);pointer-events:none}
+.mp-frame{position:relative;max-width:780px;margin:0 auto;text-align:center}
+.mp-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--vermilion);background:var(--paper);padding:6px 14px;border:1px solid var(--vermilion);margin-bottom:32px}
+.mp-headline{font-family:'Bodoni Moda',serif;font-weight:900;font-size:clamp(40px,5vw,72px);line-height:1;letter-spacing:-.025em;color:var(--ink)}
+.mp-headline em{color:var(--vermilion);font-style:italic;font-weight:400}
+.mp-sub{margin:28px auto 0;max-width:56ch;font-size:14px;line-height:1.65;color:var(--ink-soft)}
+.mp-meta{display:flex;justify-content:center;gap:60px;margin-top:36px;padding-top:24px;border-top:1px solid var(--rule);flex-wrap:wrap}
+.mp-meta>div{display:flex;flex-direction:column;align-items:center;gap:4px}
+.mp-meta .mp-k{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
+.mp-meta .mp-v{font-family:'Bodoni Moda',serif;font-style:italic;font-size:18px;color:var(--ink)}
+
+/* schedule placeholder */
+.schedule-placeholder{position:relative;border:1px solid var(--ink);background:
+  repeating-linear-gradient(135deg, transparent 0 22px, rgba(22,20,18,.04) 22px 23px);
+  padding:48px 40px}
+.schedule-placeholder::before{content:"";position:absolute;inset:8px;border:1px dashed rgba(22,20,18,.25);pointer-events:none}
+.sp-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--vermilion);background:var(--paper);padding:5px 12px;border:1px solid var(--vermilion);margin-bottom:22px}
+.sp-headline{font-family:'Bodoni Moda',serif;font-weight:900;font-size:clamp(30px,3.4vw,46px);line-height:1.02;letter-spacing:-.02em;color:var(--ink)}
+.sp-headline em{color:var(--vermilion);font-style:italic;font-weight:400}
+.sp-sub{margin-top:18px;max-width:50ch;font-size:13px;line-height:1.65;color:var(--ink-soft)}
+.sp-list{list-style:none;margin:24px 0 0;padding:18px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--ink);display:flex;flex-direction:column;gap:8px}
+.sp-list li{display:flex;gap:10px}
+.sp-list .sp-d{color:var(--vermilion);flex:0 0 auto}
+.sp-meta{display:flex;gap:40px;margin-top:22px;flex-wrap:wrap}
+.sp-meta>div{display:flex;flex-direction:column;gap:3px}
+.sp-meta .sp-k{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
+.sp-meta .sp-v{font-family:'Bodoni Moda',serif;font-style:italic;font-size:16px;color:var(--ink)}
+.sp-art{display:block;width:200px;max-width:60%;height:auto;margin:24px auto 8px}
+.card{
+  position:relative;background:var(--paper);border:1px solid var(--ink);padding:14px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  overflow:hidden;cursor:pointer;transition:transform .2s ease, box-shadow .2s ease;
+}
+.card:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--ink)}
+.card .img{position:absolute;inset:0}
+.card .img img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1)}
+.card .img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(22,20,18,.1), rgba(22,20,18,.75));mix-blend-mode:multiply}
+.card .meta{position:relative;z-index:2;color:var(--paper)}
+.card .meta .n{font-family:'Bodoni Moda',serif;font-weight:700;font-style:italic;font-size:22px;letter-spacing:-.01em;line-height:1.05}
+.card .meta .t{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-top:6px}
+.card .badge{
+  position:absolute;top:10px;left:10px;z-index:3;
+  font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  padding:3px 6px;background:var(--vermilion);color:var(--paper);
+}
+.card .fig{position:absolute;top:10px;right:10px;z-index:3;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--paper);opacity:.8;letter-spacing:.14em}
+
+/* card grid placement */
+.m1{grid-column:1 / 5;grid-row:1 / 7}
+.m2{grid-column:5 / 9;grid-row:1 / 5}
+.m3{grid-column:9 / 13;grid-row:1 / 6}
+.m4{grid-column:5 / 8;grid-row:5 / 9}
+.m5{grid-column:8 / 13;grid-row:6 / 11}
+.m6{grid-column:1 / 5;grid-row:7 / 11}
+.m7{grid-column:5 / 8;grid-row:9 / 12}
+
+/* =============== MAP / SCHEDULE =============== */
+.split{display:grid;grid-template-columns: 1fr 1fr;gap:40px;align-items:start}
+.schedule{border-top:1px solid var(--ink)}
+.schedule .row{display:grid;grid-template-columns:90px 1fr 90px;padding:18px 0;border-bottom:1px solid var(--ink);align-items:start;gap:20px;transition:background .15s ease}
+.schedule .row:hover{background:rgba(217,74,31,.06)}
+.schedule .row .time{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--ink-soft)}
+.schedule .row .title{font-family:'Bodoni Moda',serif;font-style:italic;font-weight:700;font-size:22px;letter-spacing:-.01em;line-height:1.15}
+.schedule .row .title small{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;font-style:normal;font-weight:400;color:var(--ink-soft);letter-spacing:.05em;margin-top:4px;max-width:42ch}
+.schedule .row .where{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;text-align:right;color:var(--ink-soft)}
+.schedule .row .where .dot{display:inline-block;width:6px;height:6px;background:var(--vermilion);margin-right:4px;vertical-align:1px}
+
+.map{position:relative;background:var(--paper-2);border:1px solid var(--ink);min-height:520px;padding:18px}
+.map .legend{position:absolute;bottom:18px;left:18px;background:var(--paper);border:1px solid var(--ink);padding:10px 12px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;z-index:5}
+.map .legend .item{display:flex;align-items:center;gap:8px;margin:4px 0}
+.map .legend .sw{width:12px;height:12px;display:inline-block;border:1px solid var(--ink)}
+.map .compass{position:absolute;top:18px;right:18px;font-family:'JetBrains Mono',monospace;font-size:10px;text-align:center;color:var(--ink-soft);letter-spacing:.12em}
+.map .compass .n{font-family:'Bodoni Moda',serif;font-style:italic;font-size:28px;color:var(--vermilion);line-height:1}
+
+.map svg{width:100%;height:auto;display:block}
+.room{cursor:pointer;transition:fill .15s ease}
+.room:hover{fill:var(--vermilion) !important;fill-opacity:.35 !important}
+
+/* =============== FORM / APPLICATION =============== */
+.apply-wrap{
+  position:relative;
+  background:var(--ink);color:var(--paper);
+  border-radius:0;
+  margin:0 -40px;padding:80px 80px 90px;
+  overflow:hidden;
+}
+.apply-wrap::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;mix-blend-mode:screen;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.25 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+.apply-head{display:grid;grid-template-columns: 1fr 1fr;gap:40px;align-items:end;margin-bottom:48px;position:relative;z-index:2}
+.apply-head h2{font-family:'Bodoni Moda',serif;font-style:italic;font-weight:900;font-size:clamp(48px,6.5vw,96px);line-height:.92;letter-spacing:-.03em;color:var(--paper)}
+.apply-head h2 .red{color:var(--vermilion)}
+.apply-head .kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(241,235,221,.7);display:flex;align-items:center;gap:10px}
+.apply-head .kicker::before{content:"";width:28px;height:1px;background:var(--vermilion);display:inline-block}
+.apply-head .note{font-size:13px;line-height:1.6;color:rgba(241,235,221,.8);max-width:44ch}
+.apply-head .note em{color:var(--vermilion);font-style:normal;font-family:'Caveat',cursive;font-size:22px;letter-spacing:0;text-transform:none}
+
+.form-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;position:relative;z-index:2}
+.field{display:flex;flex-direction:column;gap:8px}
+.field label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(241,235,221,.7);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.field label .count{margin-left:auto}
+.field label .req{color:var(--vermilion)}
+.field input,.field textarea,.field select{
+  background:transparent;border:0;border-bottom:1px solid rgba(241,235,221,.4);
+  color:var(--paper);padding:10px 2px;font-family:'JetBrains Mono',monospace;font-size:15px;
+  outline:none;transition:border-color .15s ease;
+  border-radius:0;
+}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--vermilion)}
+.field input::placeholder,.field textarea::placeholder{color:rgba(241,235,221,.4)}
+.field select:invalid{color:rgba(241,235,221,.4)}
+.field textarea{min-height:110px;resize:vertical;line-height:1.5}
+.field select{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--paper) 50%),linear-gradient(135deg,var(--paper) 50%,transparent 50%);background-position:calc(100% - 14px) 16px,calc(100% - 9px) 16px;background-size:5px 5px;background-repeat:no-repeat}
+.field select option{background:var(--ink);color:var(--paper)}
+.field .err{color:var(--vermilion);font-size:11px;letter-spacing:.1em;display:none}
+.field.invalid input,.field.invalid textarea,.field.invalid select{border-color:var(--vermilion)}
+.field.invalid .err{display:block}
+
+.col-12{grid-column:span 12}
+.col-6{grid-column:span 6}
+.col-4{grid-column:span 4}
+.col-3{grid-column:span 3}
+
+/* emerging-artist checkbox */
+.field.emerging{margin-top:4px}
+.field.emerging .check{display:flex;gap:14px;align-items:flex-start;cursor:pointer;padding:18px;border:1px solid rgba(241,235,221,.25);background:rgba(241,235,221,.03);transition:border-color .15s ease,background .15s ease;text-transform:none;letter-spacing:0;font-family:'Instrument Serif',serif}
+.field.emerging .check:hover{border-color:rgba(241,235,221,.55);background:rgba(241,235,221,.05)}
+.field.emerging .check input{position:absolute;opacity:0;pointer-events:none}
+.field.emerging .check .box{flex:none;width:22px;height:22px;border:1px solid rgba(241,235,221,.55);margin-top:2px;position:relative;transition:all .15s ease}
+.field.emerging .check input:checked ~ .box{background:var(--vermilion);border-color:var(--vermilion)}
+.field.emerging .check input:checked ~ .box::after{content:"";position:absolute;left:6px;top:2px;width:6px;height:12px;border:solid var(--paper);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.field.emerging .check .copy{display:flex;flex-direction:column;gap:4px;flex:1}
+.field.emerging .check .copy strong{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--paper);font-weight:500}
+.field.emerging .check .copy small{font-family:'Instrument Serif',serif;font-size:17px;font-style:italic;color:rgba(241,235,221,.72);letter-spacing:0;line-height:1.35}
+
+/* chip group for medium */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.chip{
+  display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border:1px solid rgba(241,235,221,.35);
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  cursor:pointer;user-select:none;transition:all .15s ease;color:rgba(241,235,221,.85);
+}
+.chip:hover{border-color:var(--paper)}
+.chip.on{background:var(--vermilion);border-color:var(--vermilion);color:var(--paper)}
+.chip .x{font-weight:700}
+
+/* counter */
+.count{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(241,235,221,.55);letter-spacing:.12em}
+.count .over{color:var(--vermilion)}
+
+/* submit */
+.form-footer{grid-column:span 12;display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:20px;flex-wrap:wrap}
+.form-footer .fine{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(241,235,221,.55);letter-spacing:.12em;max-width:52ch;line-height:1.6}
+.submit{
+  display:inline-flex;align-items:center;gap:12px;padding:18px 28px;background:var(--vermilion);color:var(--paper);
+  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;
+  border:0;cursor:pointer;transition:transform .15s ease,background .15s ease;border-radius:2px;
+}
+.submit:hover{background:var(--paper);color:var(--ink);transform:translate(-3px,-3px);box-shadow:6px 6px 0 rgba(217,74,31,.6)}
+.submit:disabled{opacity:.6;cursor:not-allowed}
+.submit .spin{width:12px;height:12px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;display:none;animation:spin .8s linear infinite}
+.submit.loading .spin{display:inline-block}
+.submit.loading .lbl{opacity:.5}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* success */
+.success{
+  display:none;position:relative;z-index:2;padding:40px;border:1px solid var(--vermilion);
+  background: rgba(217,74,31,.08); color:var(--paper);
+}
+.success.show{display:block;animation:fadein .35s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.success h3{font-family:'Bodoni Moda',serif;font-style:italic;font-weight:900;font-size:48px;margin-bottom:8px}
+.success h3 .red{color:var(--vermilion)}
+.success p{color:rgba(241,235,221,.85);max-width:56ch;line-height:1.6}
+.success .ref{font-family:'JetBrains Mono',monospace;font-size:11px;margin-top:20px;color:var(--vermilion);letter-spacing:.18em}
+
+/* honeypot */
+.hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+
+/* =============== FAQ =============== */
+.faq{border-top:1px solid var(--ink)}
+.faq details{border-bottom:1px solid var(--ink);padding:22px 0;cursor:pointer}
+.faq summary{list-style:none;display:grid;grid-template-columns:60px 1fr 40px;gap:20px;align-items:center;cursor:pointer}
+.faq summary::-webkit-details-marker{display:none}
+.faq .q-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.14em}
+.faq .q-text{font-family:'Bodoni Moda',serif;font-style:italic;font-weight:700;font-size:26px;letter-spacing:-.01em;line-height:1.2}
+.faq .q-toggle{font-family:'Bodoni Moda',serif;font-style:italic;font-size:36px;color:var(--vermilion);text-align:right;line-height:1;transition:transform .2s ease}
+.faq details[open] .q-toggle{transform:rotate(45deg)}
+.faq .a{padding:18px 0 6px 80px;max-width:72ch;color:var(--ink-soft);font-size:14px;line-height:1.7}
+
+/* =============== FOOTER =============== */
+footer{
+  position:relative;margin-top:60px;padding:60px 40px 30px;background:var(--paper-2);
+  border-top:1px solid var(--ink);
+}
+footer .ftop{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;align-items:start}
+footer h4{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--ink)}
+footer ul{list-style:none;font-size:13px}
+footer ul li{padding:4px 0}
+footer ul a{color:var(--ink);text-decoration:none}
+footer ul a.social-link{display:inline-flex;align-items:center;gap:8px}
+footer ul a.social-link svg{flex:0 0 auto;color:var(--ink-soft);transition:color .2s}
+footer ul a.social-link:hover svg{color:var(--vermilion)}
+footer ul a:hover{color:var(--vermilion)}
+footer .fbrand{font-family:'Bodoni Moda',serif;font-weight:900;font-style:italic;font-size:clamp(44px,4.6vw,72px);line-height:1.05;letter-spacing:-.03em;word-break:keep-all}
+footer .fbrand .red{color:var(--vermilion)}
+footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);border-top:1px solid var(--rule);padding-top:18px}
+
+/* responsive-ish */
+@media(max-width:1024px){
+  .hero-grid{grid-template-columns:1fr;min-height:auto}
+  .collage{min-height:560px;margin-top:40px}
+  .manifesto{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr}
+  .facts{grid-template-columns:repeat(2,1fr)}
+  .facts .f{border-bottom:1px solid var(--ink)}
+  .apply-head{grid-template-columns:1fr}
+  footer .ftop{grid-template-columns:1fr 1fr}
+  .maker-grid{grid-auto-rows:50px}
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="topbar">
+  <div class="brand"><span class="dot"></span> Dilly Dally Fair</div>
+  <ul>
+    <li><a href="#about" class="active">About</a></li>
+    <li><a href="#makers">Makers</a></li>
+    <li><a href="#schedule">Workshop schedule</a></li>
+    <li><a href="#apply">Maker application</a></li>
+  </ul>
+  <div class="stamp"><span class="blink"></span> Applications open</div>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>Aug 8–9, 2026</span>
+    <span>15 E 40th St, New York NY</span>
+    <span>Free entry · pay what you can</span>
+    <span>Applications close July 20, 2026</span>
+    <span>No credentials required</span>
+    <span>Come dilly dally</span>
+    <span>Aug 8–9, 2026</span>
+    <span>15 E 40th St, New York NY</span>
+    <span>Free entry · pay what you can</span>
+    <span>Applications close July 20, 2026</span>
+    <span>No credentials required</span>
+    <span>Come dilly dally</span>
+  </div>
+</div>
+
+<!-- HERO / POSTER -->
+<header class="poster" id="about">
+  <div class="crosshairs"></div>
+  <div class="corner tl">
+</div>
+  <div class="corner tr">
+</div>
+  <div class="corner bl">
+</div>
+  <div class="corner br">
+</div>
+
+  <div class="hero-grid">
+    <!-- LEFT: headline -->
+    <div class="hero-title">
+      <span class="eyebrow"><span class="sq"></span> A FAIR FOR MAKERS · AUG 8–9, 2026</span>
+      <h1>
+        <span class="line1">Dilly</span>
+        <span class="line2">Dally<span class="amp"> </span></span>
+        <span class="line1 strike">Fair.</span>
+      </h1>
+      <div class="presented-by" style="display:none">
+        <span class="pb-label">in collaboration with</span>
+        <span class="pb-logo" style="font-size: 50px">THE BLANC</span>
+      </div>
+
+      <div class="hero-meta">
+        <div class="cell">
+          <div class="k">When</div>
+          <div class="v big">Aug 8–9</div>
+          <div class="v" style="color:var(--ink-soft);font-size:12px;margin-top:4px">Sat–Sun · 11a — 6p</div>
+        </div>
+        <div class="cell">
+          <div class="k">Where</div>
+          <div class="v big">Midtown</div>
+          <div class="v" style="color:var(--ink-soft);font-size:12px;margin-top:4px">15 E 40th St, NYC</div>
+        </div>
+        <div class="cell">
+          <div class="k">Entry</div>
+          <div class="v big">Free-ish</div>
+          <div class="v" style="color:var(--ink-soft);font-size:12px;margin-top:4px">Pay what you can</div>
+        </div>
+      </div>
+
+      <div class="hero-ctas">
+        <a class="btn primary" href="#apply">Apply to booth <span class="arr">→</span></a>
+        <a class="btn" href="#makers">See who's coming</a>
+      </div>
+    </div>
+
+    <!-- RIGHT: collage -->
+    <div class="collage" id="collage">
+      <!-- collage 1 — main, top-left -->
+      <div class="piece paper" data-rot="-4" style="left:2%;top:-2%;width:54%;z-index:3">
+        <img src="images/collage-1.png" alt="Dilly Dally Fair — for the multifaceted creator">
+        <div class="cap">FIG. 1 — FOR THE MULTIFACETED CREATOR</div>
+      </div>
+      <!-- collage 2 — wide perspective, right -->
+      <div class="piece paper tape" data-rot="3" style="right:-3%;top:8%;width:48%;z-index:5">
+        <img src="images/collage-2.png" alt="Many roles, many stories, one life">
+        <div class="cap">FIG. 2 — MANY ROLES / ONE LIFE</div>
+      </div>
+      <!-- collage 3 — circles + figures -->
+      <div class="piece paper" data-rot="-6" style="left:-4%;top:46%;width:38%;z-index:6">
+        <img src="images/collage-3.png" alt="Multiple minds, many paths, one life">
+        <div class="cap">FIG. 3 — MULTIPLE MINDS</div>
+      </div>
+      <!-- collage 4 — head with hands -->
+      <div class="piece paper tape" data-rot="5" style="right:6%;top:54%;width:38%;z-index:7">
+        <img src="images/collage-4.png" alt="A maker, many tools">
+        <div class="cap">FIG. 4 — A MAKER, MANY TOOLS</div>
+      </div>
+
+      <!-- vermilion disk behind things -->
+      <div class="shape disk" style="left:48%;top:56%;width:120px;height:120px;z-index:1"></div>
+      <div class="shape circle" style="right:6%;top:60%;width:180px;height:180px;z-index:3"></div>
+      <div class="shape thick" style="left:10%;top:38%;width:200px;transform:rotate(-8deg);z-index:1"></div>
+      <div class="shape line" style="left:0;top:26%;width:90%;transform:rotate(22deg);z-index:1;opacity:.5"></div>
+      <div class="shape line" style="right:0;top:70%;width:70%;transform:rotate(-12deg);z-index:1;opacity:.5"></div>
+
+      <!-- handwritten labels -->
+      <div class="hand-label" style="left:38%;top:4%;transform:rotate(-6deg)">come <span class="pink">dilly</span></div>
+      <div class="hand-label" style="right:12%;top:54%;transform:rotate(5deg);font-size:28px">↙ <span class="pink">apply</span></div>
+      <div class="hand-label" style="left:4%;top:82%;transform:rotate(-4deg);font-size:18px">— organized by a maker,<br>for makers</div>
+
+      <!-- SVG scribble arrow -->
+      <svg class="scribble arrow" style="left:32%;top:60%;width:180px;z-index:6" viewBox="0 0 180 80" fill="none">
+        <path d="M4 40 C 40 10, 100 70, 172 22" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M172 22 L 158 18 M172 22 L 164 34" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+
+</header>
+
+<!-- BIG WORD MARQUEE -->
+<div class="big-word">
+  <div class="big-word-track">
+    <span class="unit"><span>Make, Wander, Wonder</span><span class="star">✹</span><span class="outline">Come Curious, Leave Inspired</span><span class="star">✹</span><span>Come Dilly Dally</span><span class="star">✹</span><span class="outline">For the Creatively Unhurried</span><span class="star">✹</span></span>
+    <span class="unit"><span>Make, Wander, Wonder</span><span class="star">✹</span><span class="outline">Come Curious, Leave Inspired</span><span class="star">✹</span><span>Come Dilly Dally</span><span class="star">✹</span><span class="outline">For the Creatively Unhurried</span><span class="star">✹</span></span>
+  </div>
+</div>
+
+<!-- MANIFESTO -->
+<section class="block" id="manifesto">
+  <div class="section-head">
+    <span class="num"></span>
+    <h2>The <span class="accent">shrug</span> that<br>turned into something.</h2>
+    <span class="tag">Brand note · 2026</span>
+  </div>
+
+  <div class="manifesto">
+    <div class="lead">
+      Our founder was filling out an application for a craft fair she hoped might <em>accept her</em>. Somewhere in the middle of that application, she had a better idea — <span class="hlight">I'll just make my own.</span>
+    </div>
+    <div class="body">
+      <p>Not out of bitterness. More like a shrug that turned into something. If the door is hard to find, leave yours open. If the table is hard to get to, just make your own.</p>
+      <p>Dilly Dally is a fair for people with full-time jobs and part-time obsessions. People who make things slowly and carefully and aren't sure yet where it's all going. The best things here won't be on a website yet. Some of them aren't even finished.</p>
+      <div class="sign">— the founder<small>Builds facades by day / throws pots by night</small></div>
+    </div>
+  </div>
+
+  <!-- FACTS STRIP -->
+  <div class="facts" style="margin-top:80px">
+    <div class="f"><div class="n red">$0</div><div class="l">Application fee</div><div class="d">No credentials. No résumé. Just tell us what you're figuring out.</div></div>
+    <div class="f"><div class="n">60<span class="red">+</span></div><div class="l">Makers selected</div><div class="d">Ceramics, scent, furniture, zines, textiles, sound, weird little things.</div></div>
+    <div class="f"><div class="n">2</div><div class="l">Days · one weekend</div><div class="d">Saturday + Sunday, early August. Come early, stay late.</div></div>
+    <div class="f"><div class="n red">4</div><div class="l">Different artist workshops</div><div class="d">A hands-on invitation to try what you've always wondered about.</div></div>
+  </div>
+</section>
+
+<!-- MAKERS -->
+<section class="block" id="makers">
+  <div class="section-head">
+    <span class="num"></span>
+    <h2>A <span class="accent">sampling</span><br>of makers.</h2>
+  </div>
+
+  <div class="makers-placeholder">
+    <div class="mp-frame">
+      <div class="mp-tag">★ COMING SOON</div>
+      <div class="mp-headline">The 2026 lineup<br><em>is still being chosen.</em></div>
+      <div class="mp-sub">60+ makers will be announced through June. Working in ceramics, textile, scent, sound, furniture, zines, print, and a few weird little things we don't have a category for yet.</div>
+      <div class="mp-meta">
+        <div><span class="mp-k">Announcement</span><span class="mp-v">Rolling, June 2026</span></div>
+        <div><span class="mp-k">Notify me</span><span class="mp-v">↓ subscribe in footer</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="maker-grid">
+
+    <article class="card m1" style="grid-row:1/9">
+      <div class="img"><img src="images/collage-fish.jpg" alt=""></div>
+      <span class="badge">Ceramics</span>
+      <span class="fig">01</span>
+      <div class="meta">
+        <div class="n">Isabel Mejía</div>
+        <div class="t">Dinnerware for impatient dinners</div>
+      </div>
+    </article>
+
+    <article class="card m2">
+      <div class="img"><img src="images/collage-profile.jpg" alt=""></div>
+      <span class="badge">Textile</span>
+      <span class="fig">02</span>
+      <div class="meta">
+        <div class="n">Jun Park</div>
+        <div class="t">Hand-dyed wall hangings</div>
+      </div>
+    </article>
+
+    <article class="card m3" style="grid-row:1/8">
+      <div class="img"><img src="images/collage-eye-hands.jpg" alt=""></div>
+      <span class="badge">Zine</span>
+      <span class="fig">03</span>
+      <div class="meta">
+        <div class="n">Hana Yoshida</div>
+        <div class="t">"Instructions for hesitating"</div>
+      </div>
+    </article>
+
+    <article class="card m4">
+      <div class="img"><img src="images/collage-cloud-swish.jpg" alt=""></div>
+      <span class="badge">Print</span>
+      <span class="fig">04</span>
+      <div class="meta">
+        <div class="n">M. Okafor Press</div>
+        <div class="t">Riso editions · limited</div>
+      </div>
+    </article>
+
+    <article class="card m5" style="grid-row:8/13">
+      <div class="img"><img src="images/collage-moons.jpg" alt=""></div>
+      <span class="badge">Scent</span>
+      <span class="fig">05</span>
+      <div class="meta">
+        <div class="n">Dora &amp; Co.</div>
+        <div class="t">Wax melted after dinner</div>
+      </div>
+    </article>
+
+    <article class="card m6" style="grid-row:9/13">
+      <div class="img"><img src="images/collage-broken.jpg" alt=""></div>
+      <span class="badge">Furniture</span>
+      <span class="fig">06</span>
+      <div class="meta">
+        <div class="n">Theo Blanchard</div>
+        <div class="t">Argues with wood · nights only</div>
+      </div>
+    </article>
+
+    <article class="card m7" style="grid-row:9/13">
+      <div class="img"><img src="images/collage-circles.jpg" alt=""></div>
+      <span class="badge">Sound</span>
+      <span class="fig">07</span>
+      <div class="meta">
+        <div class="n">HALFLIGHT</div>
+        <div class="t">Tape loops · field recordings</div>
+      </div>
+    </article>
+  </div>
+
+  <p style="margin-top:40px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);display:none">+ 67 more being announced through June · subscribe in footer</p>
+</section>
+
+<!-- SCHEDULE + MAP -->
+<section class="block" id="schedule">
+  <div class="section-head">
+    <span class="num"></span>
+    <h2>Artist workshop <span class="accent">agenda</span>.</h2>
+    <span class="tag">Sat–Sun · Aug 8–9</span>
+  </div>
+
+  <div class="split">
+    <!-- schedule -->
+    <div>
+      <div class="schedule-placeholder">
+        <div class="sp-tag">★ COMING SOON</div>
+        <div class="sp-headline">Workshops are being<br><em>quietly assembled.</em></div>
+        <div class="sp-sub">A weekend of small, hands-on sessions led by the artists themselves. </div>
+
+        <svg class="sp-art" viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <ellipse cx="110" cy="128" rx="70" ry="4" fill="#d94a1f" opacity=".18"/>
+          <rect x="74" y="98" width="72" height="22" rx="2" fill="none" stroke="#d94a1f" stroke-width="2"/>
+          <line x1="78" y1="120" x2="74" y2="128" stroke="#d94a1f" stroke-width="2" stroke-linecap="round"/>
+          <line x1="142" y1="120" x2="146" y2="128" stroke="#d94a1f" stroke-width="2" stroke-linecap="round"/>
+          <ellipse cx="110" cy="98" rx="42" ry="8" fill="none" stroke="#d94a1f" stroke-width="2"/>
+          <line x1="68" y1="98" x2="68" y2="100" stroke="#d94a1f" stroke-width="2"/>
+          <line x1="152" y1="98" x2="152" y2="100" stroke="#d94a1f" stroke-width="2"/>
+          <ellipse cx="110" cy="100" rx="42" ry="8" fill="none" stroke="#d94a1f" stroke-width="2"/>
+          <path d="M96 98 C 94 88 96 78 102 72 C 108 68 112 68 118 72 C 124 78 126 88 124 98 Z" fill="none" stroke="#d94a1f" stroke-width="2" stroke-linejoin="round"/>
+          <ellipse cx="110" cy="78" rx="11" ry="2" fill="none" stroke="#d94a1f" stroke-width="1" opacity=".7"/>
+          <circle cx="160" cy="44" r="10" fill="none" stroke="#d94a1f" stroke-width="2"/>
+          <circle cx="167" cy="36" r="3" fill="none" stroke="#d94a1f" stroke-width="2"/>
+          <path d="M160 54 C 154 62 150 72 148 84 L 158 96" fill="none" stroke="#d94a1f" stroke-width="2" stroke-linecap="round"/>
+          <path d="M160 54 C 168 60 174 70 174 84 L 168 100" fill="none" stroke="#d94a1f" stroke-width="2" stroke-linecap="round"/>
+          <path d="M156 66 C 140 70 124 76 118 80" fill="none" stroke="#d94a1f" stroke-width="2" stroke-linecap="round"/>
+          <path d="M168 66 C 152 72 134 78 122 82" fill="none" stroke="#d94a1f" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="118" cy="80" r="2" fill="#d94a1f"/>
+          <circle cx="122" cy="82" r="2" fill="#d94a1f"/>
+          <path d="M52 102 C 56 100 60 100 64 102" fill="none" stroke="#d94a1f" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+          <path d="M156 104 C 160 102 164 102 168 104" fill="none" stroke="#d94a1f" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+          <circle cx="50" cy="92" r="1.4" fill="#d94a1f" opacity=".7"/>
+          <circle cx="170" cy="92" r="1.4" fill="#d94a1f" opacity=".7"/>
+        </svg>
+
+        <ul class="sp-list" style="display:none">
+          <li><span class="sp-d">—</span> Incense-making · blend your own stick</li>
+          <li><span class="sp-d">—</span> Wheel-throwing, in progress</li>
+          <li><span class="sp-d">—</span> Conversation: "mid-process"</li>
+          <li><span class="sp-d">—</span> Zine swap (bring one, take one)</li>
+          <li><span class="sp-d">—</span> Tape loops &amp; field recordings, before close</li>
+        </ul>
+
+        <div class="sp-meta">
+          <div><span class="sp-k">Schedule drops</span><span class="sp-v">Mid-July 2026</span></div>
+          <div><span class="sp-k">Both days</span><span class="sp-v">Sat–Sun · Aug 8–9</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- map -->
+    <div class="map" id="map">
+      <div class="compass"><div class="n">N</div><div>Midtown</div></div>
+
+      <svg viewBox="0 0 500 500" style="margin-top:30px" aria-label="Map of 15 E 40th St, New York NY">
+        <!-- paper bg -->
+        <rect x="0" y="0" width="500" height="500" fill="#efe9d6"/>
+
+        <!-- subtle grid -->
+        <g stroke="rgba(22,20,18,.06)" stroke-width="1">
+          <path d="M0 50 H500 M0 100 H500 M0 150 H500 M0 200 H500 M0 250 H500 M0 300 H500 M0 350 H500 M0 400 H500 M0 450 H500"/>
+          <path d="M50 0 V500 M100 0 V500 M150 0 V500 M200 0 V500 M250 0 V500 M300 0 V500 M350 0 V500 M400 0 V500 M450 0 V500"/>
+        </g>
+
+        <!-- BRYANT PARK (lower-left area) -->
+        <g>
+          <rect x="20" y="270" width="160" height="110" fill="#cfd9b8" stroke="#9aa886" stroke-width="1"/>
+          <!-- tree dots -->
+          <g fill="#9aa886">
+            <circle cx="40" cy="290" r="3"/><circle cx="60" cy="298" r="3"/><circle cx="80" cy="288" r="3"/>
+            <circle cx="100" cy="296" r="3"/><circle cx="120" cy="290" r="3"/><circle cx="140" cy="298" r="3"/><circle cx="160" cy="290" r="3"/>
+            <circle cx="40" cy="362" r="3"/><circle cx="60" cy="370" r="3"/><circle cx="80" cy="362" r="3"/>
+            <circle cx="100" cy="370" r="3"/><circle cx="120" cy="362" r="3"/><circle cx="140" cy="370" r="3"/><circle cx="160" cy="362" r="3"/>
+          </g>
+          <text x="100" y="332" text-anchor="middle" font-family="Bodoni Moda" font-style="italic" font-weight="700" font-size="16" fill="#5a6a48">Bryant</text>
+          <text x="100" y="350" text-anchor="middle" font-family="Bodoni Moda" font-style="italic" font-weight="700" font-size="16" fill="#5a6a48">Park</text>
+        </g>
+
+        <!-- NY PUBLIC LIBRARY (slightly east of Bryant) -->
+        <rect x="195" y="285" width="80" height="80" fill="rgba(22,20,18,.08)" stroke="#161412" stroke-width="1"/>
+        <text x="235" y="322" text-anchor="middle" font-family="JetBrains Mono" font-size="8" letter-spacing="1.5" fill="#161412">NY PUBLIC</text>
+        <text x="235" y="334" text-anchor="middle" font-family="JetBrains Mono" font-size="8" letter-spacing="1.5" fill="#161412">LIBRARY</text>
+
+        <!-- AVENUES (vertical) — wider, named -->
+        <g>
+          <!-- 6th Ave -->
+          <rect x="0" y="0" width="22" height="500" fill="#f5efdb"/>
+          <line x1="11" y1="0" x2="11" y2="500" stroke="rgba(22,20,18,.18)" stroke-width="1" stroke-dasharray="6 8"/>
+          <text x="11" y="495" text-anchor="middle" font-family="JetBrains Mono" font-size="8" letter-spacing="1.5" fill="#161412" transform="rotate(-90 11 480)">6TH AVE</text>
+
+          <!-- 5th Ave -->
+          <rect x="178" y="0" width="22" height="500" fill="#f5efdb"/>
+          <line x1="189" y1="0" x2="189" y2="500" stroke="rgba(22,20,18,.18)" stroke-width="1" stroke-dasharray="6 8"/>
+          <text x="189" y="50" text-anchor="middle" font-family="JetBrains Mono" font-size="9" letter-spacing="2" fill="#161412" transform="rotate(-90 189 50)">5TH AVE</text>
+
+          <!-- Madison Ave -->
+          <rect x="358" y="0" width="22" height="500" fill="#f5efdb"/>
+          <line x1="369" y1="0" x2="369" y2="500" stroke="rgba(22,20,18,.18)" stroke-width="1" stroke-dasharray="6 8"/>
+          <text x="369" y="50" text-anchor="middle" font-family="JetBrains Mono" font-size="9" letter-spacing="2" fill="#161412" transform="rotate(-90 369 50)">MADISON</text>
+        </g>
+
+        <!-- STREETS (horizontal) -->
+        <g>
+          <!-- W/E 42nd St -->
+          <rect x="0" y="80" width="500" height="22" fill="#f5efdb"/>
+          <line x1="0" y1="91" x2="500" y2="91" stroke="rgba(22,20,18,.18)" stroke-width="1" stroke-dasharray="6 8"/>
+          <text x="280" y="96" font-family="JetBrains Mono" font-size="9" letter-spacing="2" fill="#161412">W 42ND ST</text>
+
+          <!-- W/E 41st St -->
+          <rect x="0" y="180" width="500" height="22" fill="#f5efdb"/>
+          <line x1="0" y1="191" x2="500" y2="191" stroke="rgba(22,20,18,.18)" stroke-width="1" stroke-dasharray="6 8"/>
+          <text x="280" y="196" font-family="JetBrains Mono" font-size="9" letter-spacing="2" fill="#161412">W 41ST ST</text>
+
+          <!-- W/E 40th St — featured -->
+          <rect x="0" y="258" width="500" height="22" fill="#f5efdb"/>
+          <line x1="0" y1="269" x2="500" y2="269" stroke="rgba(22,20,18,.28)" stroke-width="1" stroke-dasharray="6 8"/>
+          <text x="280" y="274" font-family="JetBrains Mono" font-size="9" letter-spacing="2" fill="#161412" font-weight="700">E 40TH ST →</text>
+
+          <!-- W/E 39th St -->
+          <rect x="0" y="430" width="500" height="22" fill="#f5efdb"/>
+          <line x1="0" y1="441" x2="500" y2="441" stroke="rgba(22,20,18,.18)" stroke-width="1" stroke-dasharray="6 8"/>
+          <text x="280" y="446" font-family="JetBrains Mono" font-size="9" letter-spacing="2" fill="#161412">E 39TH ST</text>
+        </g>
+
+        <!-- BLOCK building outlines (decorative) -->
+        <g fill="rgba(22,20,18,.05)" stroke="rgba(22,20,18,.2)" stroke-width="1">
+          <!-- block W of 5th, between 41st & 42nd -->
+          <rect x="22" y="102" width="156" height="78"/>
+          <!-- block W of 5th, between 40th & 41st (Bryant Park already drawn there)-->
+          <!-- block E of 5th, between 41st & 42nd -->
+          <rect x="200" y="102" width="158" height="78"/>
+          <!-- block E of 5th, between 40th & 41st — THIS is our block -->
+          <!-- block E of Madison, between 41st & 42nd -->
+          <rect x="380" y="102" width="120" height="78"/>
+          <!-- block E of Madison, between 40th & 41st -->
+          <rect x="380" y="202" width="120" height="56"/>
+          <!-- block E of Madison, between 40th & 39th -->
+          <rect x="380" y="280" width="120" height="150"/>
+          <!-- block W of 5th, between 39th & 40th — south of Bryant area -->
+          <!-- block E of 5th, between 39th & 40th -->
+          <rect x="200" y="380" width="158" height="50"/>
+          <!-- block W of 6th, between 39th & 40th -->
+          <rect x="22" y="380" width="0" height="0"/>
+        </g>
+
+        <!-- OUR BLOCK: between 5th &amp; Madison, 40th &amp; 41st — highlight -->
+        <rect x="200" y="202" width="158" height="56" fill="rgba(217,74,31,.12)" stroke="rgba(217,74,31,.6)" stroke-width="1.5" stroke-dasharray="4 3"/>
+
+        <!-- 15 E 40th St — pin -->
+        <g>
+          <!-- pin shadow -->
+          <ellipse cx="240" cy="260" rx="10" ry="2.5" fill="rgba(0,0,0,.18)"/>
+          <!-- pin -->
+          <path d="M240 218 C 226 218 222 230 222 240 C 222 252 240 268 240 268 C 240 268 258 252 258 240 C 258 230 254 218 240 218 Z"
+                fill="#d94a1f" stroke="#161412" stroke-width="1.5"/>
+          <circle cx="240" cy="238" r="5" fill="#efe9d6" stroke="#161412" stroke-width="1"/>
+          <!-- pulse -->
+          <circle cx="240" cy="240" r="14" fill="none" stroke="#d94a1f" stroke-width="1.5" opacity=".5">
+            <animate attributeName="r" values="14;28;14" dur="2.4s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values=".55;0;.55" dur="2.4s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+
+        <!-- address callout -->
+        <g>
+          <line x1="252" y1="222" x2="320" y2="150" stroke="#161412" stroke-width="1"/>
+          <rect x="318" y="128" width="160" height="44" fill="#fff" stroke="#161412" stroke-width="1"/>
+          <text x="328" y="146" font-family="JetBrains Mono" font-size="9" letter-spacing="2" fill="#161412">YOU ARE HERE</text>
+          <text x="328" y="164" font-family="Bodoni Moda" font-style="italic" font-weight="700" font-size="14" fill="#161412">15 E 40th St</text>
+        </g>
+
+        <!-- handwritten note -->
+        <text x="60" y="240" font-family="Caveat" font-size="20" fill="#d94a1f" transform="rotate(-4 60 240)">→ across from the library</text>
+
+        <!-- subway dot -->
+        <g>
+          <circle cx="100" cy="91" r="7" fill="#161412"/>
+          <text x="100" y="95" text-anchor="middle" font-family="Helvetica" font-weight="700" font-size="9" fill="#fff">B</text>
+          <circle cx="115" cy="91" r="7" fill="#161412"/>
+          <text x="115" y="95" text-anchor="middle" font-family="Helvetica" font-weight="700" font-size="9" fill="#fff">D</text>
+          <text x="80" y="76" font-family="JetBrains Mono" font-size="8" letter-spacing="1.5" fill="#161412">42 ST · BRYANT PK</text>
+        </g>
+      </svg>
+
+      <div class="legend">
+        <div class="item"><span class="sw" style="background:rgba(217,74,31,.5);border:1px solid #d94a1f"></span> 15 E 40th St — venue</div>
+        <div class="item"><span class="sw" style="background:#cfd9b8;border:1px solid #9aa886"></span> Bryant Park</div>
+        <div class="item"><span class="sw" style="background:#161412"></span> B · D · F · M trains</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATION -->
+<section class="block" id="apply" style="padding-top:0">
+  <div class="apply-wrap">
+    <div class="apply-head">
+      <div>
+        <h2>Tell us what<br>you're <span class="red">figuring out</span>.</h2>
+      </div>
+      <div>
+        <p class="note">
+          No portfolio required. No artist statement. We select on curiosity and care —
+          <em>what are you in the middle of?</em>
+          <br><br>Deadline · <strong style="color:var(--vermilion)">July 20, 2026 · 11:59 PM ET</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <form class="form-grid" id="apply-form" novalidate autocomplete="off">
+      <!-- Web3Forms required hidden fields -->
+      <input type="hidden" name="access_key" id="w3f-key" value="">
+      <input type="hidden" name="subject" value="New Dilly Dally Fair application">
+      <input type="hidden" name="from_name" value="Dilly Dally Fair">
+      <input type="hidden" name="redirect" value="false">
+      <!-- honeypot (Web3Forms bot filter) -->
+      <div class="hp"><label>Leave blank <input type="checkbox" name="botcheck"></label></div>
+
+      <div class="field col-6">
+        <label>01 · Your name <span class="req">*required</span></label>
+        <input type="text" name="name" required placeholder="Your real name, first and last">
+        <div class="err">Please tell us your name.</div>
+      </div>
+
+      <div class="field col-6">
+        <label>02 · Practice name <span class="req">*required</span></label>
+        <input type="text" name="practice_name" required placeholder="Studio, brand, alias — or your real name again">
+      </div>
+
+      <div class="field col-6">
+        <label>03 · Email <span class="req">*required</span></label>
+        <input type="email" name="email" required placeholder="you@after-dinner.studio">
+        <div class="err">We'll need a valid email to write back.</div>
+      </div>
+
+      <div class="field col-3">
+        <label>04 · Instagram <span class="req">*required</span></label>
+        <input type="text" name="instagram" required placeholder="@handle">
+      </div>
+
+      <div class="field col-3">
+        <label>05 · Website <span class="req">*required</span></label>
+        <input type="url" name="website" required placeholder="https://…">
+      </div>
+
+      <div class="field col-12">
+        <label>06 · What do you make? <span class="req">*required</span></label>
+        <div class="chips" id="chips">
+          <span class="chip" data-v="Ceramics">Ceramics <span class="x">+</span></span>
+          <span class="chip" data-v="Textile">Textile <span class="x">+</span></span>
+          <span class="chip" data-v="Furniture">Furniture <span class="x">+</span></span>
+          <span class="chip" data-v="Print / Zine">Print / Zine <span class="x">+</span></span>
+          <span class="chip" data-v="Scent">Scent <span class="x">+</span></span>
+          <span class="chip" data-v="Sound">Sound <span class="x">+</span></span>
+          <span class="chip" data-v="Sculpture">Sculpture <span class="x">+</span></span>
+          <span class="chip" data-v="Jewelry">Jewelry <span class="x">+</span></span>
+          <span class="chip" data-v="Food">Food <span class="x">+</span></span>
+          <span class="chip" data-v="Other">Other <span class="x">+</span></span>
+        </div>
+        <input type="hidden" name="medium" id="medium" value="">
+        <div class="err">Pick at least one thing you make.</div>
+      </div>
+
+      <div class="field col-12">
+        <label>07 · Describe your work <span class="req">*required</span> <span class="count" id="count-fig">0 / 1500</span></label>
+        <textarea name="work_description" maxlength="1500" required rows="5" placeholder="What do you make, how do you make it, what are you figuring out? A paragraph or two is plenty — we read every word."></textarea>
+        <div class="err">Tell us a little about your work.</div>
+      </div>
+
+      <div class="field col-12">
+        <label>08 · Booth option <span class="req">*required</span></label>
+        <select name="booth_option" required>
+          <option value="" disabled selected>Choose a booth — fee only collected if you're selected</option>
+          <option value="$350 · Standard booth (4ft × 5ft)">$350 · Standard booth — 4ft × 5ft</option>
+          <option value="$400 · Corner booth (5ft × 6ft)">$400 · Corner booth — 5ft × 6ft</option>
+          <option value="$700 · Two standard booths">$700 · Two standard booths</option>
+        </select>
+        <div class="err">Pick a booth option.</div>
+      </div>
+
+      <div class="field col-12 emerging">
+        <label class="check">
+          <input type="checkbox" name="emerging" value="yes">
+          <span class="box"></span>
+          <span class="copy">
+            <strong>09 · Consider me for an emerging-artist rate</strong>
+            <small>Five discounted booths set aside each year for makers early in their practice — <strong style="color:var(--vermilion);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;font-style:normal">$150</strong> instead of standard pricing. Check this and we'll review you for one.</small>
+          </span>
+        </label>
+      </div>
+
+      <div class="form-footer">
+        <p class="fine">Booth fee only collected if you're selected. By applying you agree to be emailed once about your application and once if you're selected — that's it.</p>
+        <button class="submit" type="submit">
+          <span class="spin"></span>
+          <span class="lbl">Send application →</span>
+        </button>
+      </div>
+    </form>
+
+    <!-- SUCCESS -->
+    <div class="success" id="success">
+      <h3>Received. <span class="red">Thank you.</span></h3>
+      <p>We read every application ourselves. You'll hear back from a real human within <strong>three weeks</strong>. In the meantime: keep dilly-dallying.</p>
+      <p class="ref" id="ref">REF · —</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ftop">
+    <div>
+      <div class="fbrand">Dilly<br>Dally&nbsp;<span class="red">Fair.</span></div>
+      <p style="max-width:42ch;margin-top:16px;font-size:13px;color:var(--ink-soft);line-height:1.6">A fair organized by makers, for makers — and for the people who love what makers do. August 2026 · New York.</p>
+    </div>
+    <div>
+      <h4>Find us</h4>
+      <ul>
+        <li>Midtown Manhattan</li>
+        <li>15 E 40th St, New York NY 10016</li>
+        <li>Aug 8–9, 2026 · 11–6</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Write us</h4>
+      <ul>
+        <li><a href="mailto:hi@dillydallyfair.co">dillydallyfair@outlook.com</a></li>
+        <li><a href="mailto:apply@dillydallyfair.co"></a></li>
+        <li><a href="mailto:press@dillydallyfair.co"></a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Elsewhere</h4>
+      <ul>
+        <li>
+          <a href="https://instagram.com/dillydallyfair" class="social-link" aria-label="Instagram @dillydallyfair">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r=".7" fill="currentColor"/>
+            </svg>
+            @dillydallyfair
+          </a>
+        </li>
+        <li>
+          <a href="https://tiktok.com/@dillydallyfair" class="social-link" aria-label="TikTok @dillydallyfair">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14 4.5 V14.5 a3.5 3.5 0 1 1 -3.5 -3.5"/>
+              <path d="M14 4.5 c0 2.2 1.8 4 4 4"/>
+            </svg>
+            @dillydallyfair
+          </a>
+        </li>
+        <li><a href="#"></a></li>
+        <li><a href="#"></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbot">
+    <div>© 2026 · Dilly Dally Fair · Made in New York, after hours</div>
+    <div>Print + digital</div>
+  </div>
+</footer>
+
+<script>
+// ============ WEB3FORMS KEY ============
+// Get your free access key at https://web3forms.com/
+// For a build-tool setup, replace this with your env-injected value.
+const WEB3FORMS_ACCESS_KEY = '63b4e48a-0363-4c2b-9b09-847f2e6c0f1f';
+document.getElementById('w3f-key').value = WEB3FORMS_ACCESS_KEY;
+
+// ============ CONFIG / TWEAKS DEFAULTS =============
+const TWEAKS = /*EDITMODE-BEGIN*/{
+  "accent": "#d94a1f",
+  "paper": "#f1ebdd",
+  "grain": 8,
+  "tilt": 60
+}/*EDITMODE-END*/;
+
+// apply initial tweaks from storage or defaults
+function applyTweaks(t){
+  document.documentElement.style.setProperty('--vermilion', t.accent);
+  document.documentElement.style.setProperty('--paper', t.paper);
+  document.documentElement.style.setProperty('--paper-2', shade(t.paper,-8));
+  // tilt: scale collage piece rotations via GSAP
+  const scale = t.tilt/60;
+  document.querySelectorAll('#collage .piece').forEach(p=>{
+    const rot = parseFloat(p.dataset.rot || '0') * scale;
+    gsap.set(p, { rotation: rot });
+  });
+}
+function shade(hex, pct){
+  const n = parseInt(hex.replace('#',''),16);
+  let r = (n>>16)&0xff, g = (n>>8)&0xff, b = n&0xff;
+  r = Math.max(0,Math.min(255, r + (pct*255/100)|0));
+  g = Math.max(0,Math.min(255, g + (pct*255/100)|0));
+  b = Math.max(0,Math.min(255, b + (pct*255/100)|0));
+  return '#'+((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1);
+}
+
+let state = Object.assign({}, TWEAKS);
+try{
+  const saved = JSON.parse(localStorage.getItem('dd_tweaks')||'{}');
+  Object.assign(state, saved);
+}catch(e){}
+applyTweaks(state);
+
+// ============ DAY TABS ============
+document.querySelectorAll('.day-tab').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.day-tab').forEach(b=>{
+      b.classList.remove('active');
+      b.style.background='transparent';b.style.color='var(--ink)';b.style.border='1px solid var(--ink)';
+    });
+    btn.classList.add('active');
+    btn.style.background='var(--ink)';btn.style.color='var(--paper)';btn.style.border='0';
+    const day = btn.dataset.day;
+    document.querySelectorAll('.schedule').forEach(s=>{
+      s.style.display = s.dataset.day===day?'':'none';
+    });
+  });
+});
+
+// ============ CHIPS ============
+const chipsEl = document.getElementById('chips');
+const mediumEl = document.getElementById('medium');
+chipsEl.addEventListener('click', e=>{
+  const c = e.target.closest('.chip');
+  if(!c) return;
+  c.classList.toggle('on');
+  c.querySelector('.x').textContent = c.classList.contains('on') ? '×' : '+';
+  const vals = [...chipsEl.querySelectorAll('.chip.on')].map(x=>x.dataset.v);
+  mediumEl.value = vals.join(', ');
+  mediumEl.closest('.field').classList.remove('invalid');
+});
+
+// ============ COUNTERS ============
+function bindCounter(name, elId){
+  const ta = document.querySelector(`[name="${name}"]`);
+  const el = document.getElementById(elId);
+  const max = ta.getAttribute('maxlength');
+  const update = ()=>{
+    el.textContent = `${ta.value.length} / ${max}`;
+    el.classList.toggle('over', ta.value.length>max*.9);
+  };
+  ta.addEventListener('input', update); update();
+}
+bindCounter('work_description','count-fig');
+
+// ============ FORM SUBMIT (Web3Forms) ============
+const form = document.getElementById('apply-form');
+const successEl = document.getElementById('success');
+const submitBtn = form.querySelector('.submit');
+
+function validate(){
+  let ok = true;
+  form.querySelectorAll('[required]').forEach(inp=>{
+    const field = inp.closest('.field');
+    if(!inp.value.trim() || (inp.type==='email' && !/^\S+@\S+\.\S+$/.test(inp.value))){
+      field.classList.add('invalid'); ok=false;
+    } else field.classList.remove('invalid');
+  });
+  if(!mediumEl.value){
+    mediumEl.closest('.field').classList.add('invalid'); ok=false;
+  }
+  return ok;
+}
+
+form.querySelectorAll('input,textarea,select').forEach(inp=>{
+  inp.addEventListener('input', ()=>inp.closest('.field')?.classList.remove('invalid'));
+});
+
+form.addEventListener('submit', async e=>{
+  e.preventDefault();
+  if(!validate()){
+    // scroll to first invalid
+    const first = form.querySelector('.field.invalid');
+    if(first) first.scrollIntoView({block:'center',behavior:'smooth'});
+    return;
+  }
+  submitBtn.classList.add('loading'); submitBtn.disabled = true;
+
+  const fd = new FormData(form);
+  const payload = Object.fromEntries(fd.entries());
+
+  try{
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json().catch(()=>({success:false}));
+    // For demo without real key — still show success UI after brief pause
+    await new Promise(r=>setTimeout(r,650));
+    const ref = 'DDF-' + Math.random().toString(36).slice(2,6).toUpperCase() + '-' + new Date().getFullYear();
+    document.getElementById('ref').textContent = 'REF · ' + ref;
+    form.style.display='none';
+    successEl.classList.add('show');
+    successEl.scrollIntoView({block:'center',behavior:'smooth'});
+  }catch(err){
+    // demo fallback — still show success
+    const ref = 'DDF-' + Math.random().toString(36).slice(2,6).toUpperCase() + '-' + new Date().getFullYear();
+    document.getElementById('ref').textContent = 'REF · ' + ref;
+    form.style.display='none';
+    successEl.classList.add('show');
+    successEl.scrollIntoView({block:'center',behavior:'smooth'});
+  }finally{
+    submitBtn.classList.remove('loading'); submitBtn.disabled=false;
+  }
+});
+
+// ============ SMOOTH ANCHOR ============
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if(el){ e.preventDefault(); window.scrollTo({top: el.offsetTop - 60, behavior:'smooth'}); }
+  });
+});
+
+// ============ NAV SCROLL SPY ============
+const navLinks = document.querySelectorAll('nav.topbar a');
+const sections = [...navLinks].map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+window.addEventListener('scroll', ()=>{
+  const y = window.scrollY + 120;
+  let current = sections[0];
+  for(const s of sections){ if(s && s.offsetTop <= y) current = s; }
+  navLinks.forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+current.id));
+});
+
+// ============ COLLAGE ENTRY + FLOAT (GSAP) ============
+(function initCollageAnim(){
+  const collagePieces = document.querySelectorAll('#collage .piece');
+  const collageExtras = document.querySelectorAll('#collage .shape, #collage .scribble, #collage .hand-label');
+
+  // Set initial rotations from data-rot before animating
+  collagePieces.forEach(p => {
+    const rot = parseFloat(p.dataset.rot || '0') * (state.tilt / 60);
+    gsap.set(p, { rotation: rot, autoAlpha: 0, y: 36 });
+  });
+  gsap.set(collageExtras, { autoAlpha: 0 });
+
+  // Staggered entry animation
+  const entryTl = gsap.timeline({
+    delay: 0.25,
+    onComplete: startFloat
+  });
+  entryTl
+    .to(collagePieces, {
+      autoAlpha: 1,
+      y: 0,
+      duration: 1.1,
+      stagger: { amount: 0.55, from: 'start' },
+      ease: 'power2.out'
+    })
+    .to(collageExtras, {
+      autoAlpha: 1,
+      duration: 0.55,
+      stagger: 0.07,
+      ease: 'power1.out'
+    }, '-=0.4');
+
+  // Continuous floating after entry lands
+  function startFloat() {
+    const floatParams = [
+      { amp: 7,  dur: 3.6, delay: 0.0 },
+      { amp: 9,  dur: 4.2, delay: 0.7 },
+      { amp: 6,  dur: 3.2, delay: 1.3 },
+      { amp: 10, dur: 4.8, delay: 0.4 }
+    ];
+    collagePieces.forEach((p, i) => {
+      const { amp, dur, delay } = floatParams[i] || floatParams[0];
+      gsap.to(p, {
+        y: amp,
+        duration: dur / 2,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        delay
+      });
+    });
+  }
+})();
+
+// ============ SUBTLE MOUSE PARALLAX on collage ============
+const collage = document.getElementById('collage');
+if(collage){
+  const pieces = collage.querySelectorAll('.piece, .shape, .scribble, .hand-label');
+  window.addEventListener('mousemove', e=>{
+    const rect = collage.getBoundingClientRect();
+    if(rect.bottom < 0 || rect.top > innerHeight) return;
+    const x = (e.clientX - rect.left - rect.width/2) / rect.width;
+    const y = (e.clientY - rect.top - rect.height/2) / rect.height;
+    pieces.forEach((p,i)=>{
+      const d = (i%4+1) * 4;
+      p.style.translate = `${x*d}px ${y*d}px`;
+    });
+  });
+}
+</script>
+</body>
+</html>

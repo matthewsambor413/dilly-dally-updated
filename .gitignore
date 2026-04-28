@@ -1,0 +1,5 @@
+# Handoff archive
+*.zip
+
+# Temp files
+extracted_html.txt
