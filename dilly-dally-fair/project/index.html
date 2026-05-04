@@ -456,6 +456,12 @@ footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-it
   section.block{padding:80px 20px}
   footer .ftop{grid-template-columns:1fr}
   footer{padding:40px 20px 24px}
+  /* Nav: brand+stamp on row 1, links scrollable on row 2 */
+  nav.topbar{padding:10px 16px;flex-wrap:wrap;gap:2px 0}
+  nav.topbar .brand{flex:1}
+  nav.topbar ul{order:3;width:100%;gap:16px;overflow-x:auto;scrollbar-width:none;padding:6px 0 2px;font-size:10px;letter-spacing:.06em;white-space:nowrap}
+  nav.topbar ul::-webkit-scrollbar{display:none}
+  .ticker{top:68px}
 }
 
 </style>
