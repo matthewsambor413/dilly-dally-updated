@@ -456,9 +456,13 @@ footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-it
   section.block{padding:80px 20px}
   footer .ftop{grid-template-columns:1fr}
   footer{padding:40px 20px 24px}
-  /* Faster scrolling banners on mobile */
-  .ticker-track{animation-duration:18s}
-  .big-word-track{animation-duration:25s}
+  /* Faster + seamless scrolling banners on mobile.
+     gap→margin-right folds trailing space into each item so -50% lands
+     exactly on the copy boundary, eliminating the loop jump. */
+  .ticker-track{gap:0;animation-duration:14s}
+  .ticker-track span{margin-right:44px}
+  .big-word-track{gap:0;animation-duration:20s}
+  .big-word-track .unit{margin-right:64px}
   /* Nav: brand+stamp on row 1, links scrollable on row 2 */
   nav.topbar{padding:10px 16px;flex-wrap:wrap;gap:2px 0}
   nav.topbar .brand{flex:1}
