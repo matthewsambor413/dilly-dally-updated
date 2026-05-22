@@ -977,8 +977,13 @@ footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-it
         <input type="url" name="website" required placeholder="https://…">
       </div>
 
+      <div class="field col-6">
+        <label>06 · Supplemental images <span style="color:rgba(241,235,221,.5);font-size:10px;letter-spacing:.14em">(ex. Drive link) · optional</span></label>
+        <input type="url" name="supplemental_images" placeholder="https://drive.google.com/…">
+      </div>
+
       <div class="field col-12">
-        <label>06 · What do you make? <span class="req">*required</span></label>
+        <label>07 · What do you make? <span class="req">*required</span></label>
         <div class="chips" id="chips">
           <span class="chip" data-v="Ceramics">Ceramics <span class="x">+</span></span>
           <span class="chip" data-v="Textile">Textile <span class="x">+</span></span>
@@ -996,13 +1001,13 @@ footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-it
       </div>
 
       <div class="field col-12">
-        <label>07 · Describe your work <span class="req">*required</span> <span class="count" id="count-fig">0 / 1500</span></label>
+        <label>08 · Describe your work <span class="req">*required</span> <span class="count" id="count-fig">0 / 1500</span></label>
         <textarea name="work_description" maxlength="1500" required rows="5" placeholder="What do you make, how do you make it, what are you figuring out? A paragraph or two is plenty — we read every word."></textarea>
         <div class="err">Tell us a little about your work.</div>
       </div>
 
       <div class="field col-12">
-        <label>08 · Booth option <span class="req">*required</span></label>
+        <label>09 · Booth option <span class="req">*required</span></label>
         <select name="booth_option" required>
           <option value="" disabled selected>Choose a booth — fee only collected if you're selected</option>
           <option value="$350 · Standard booth (4ft × 5ft)">$350 · Standard booth — 4ft × 5ft</option>
@@ -1017,7 +1022,7 @@ footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-it
           <input type="checkbox" name="emerging" value="yes">
           <span class="box"></span>
           <span class="copy">
-            <strong>09 · Consider me for an emerging-artist rate</strong>
+            <strong>10 · Consider me for an emerging-artist rate</strong>
             <small>Five discounted booths set aside each year for makers early in their practice — <strong style="color:var(--vermilion);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;font-style:normal">$150</strong> instead of standard pricing. Check this and we'll review you for one.</small>
           </span>
         </label>
