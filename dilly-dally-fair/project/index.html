@@ -435,6 +435,15 @@ footer .fbrand{font-family:'Bodoni Moda',serif;font-weight:900;font-style:italic
 footer .fbrand .red{color:var(--vermilion)}
 footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);border-top:1px solid var(--rule);padding-top:18px}
 
+/* =============== WORKSHOP GRID =============== */
+.workshop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:60px}
+.workshop-card{min-height:380px}
+.workshop-card .meta .price{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;color:rgba(241,235,221,.65);margin-top:4px}
+.workshop-card .ticket{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:6px 10px;background:var(--vermilion);color:var(--paper);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;position:relative;z-index:4;transition:background .15s ease}
+.workshop-card .ticket:hover{background:var(--paper);color:var(--ink)}
+.schedule-day-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);padding:12px 0 8px;border-bottom:1px solid var(--rule);margin-bottom:0}
+.schedule-day-label + .row{border-top:0}
+
 /* responsive-ish */
 @media(max-width:1024px){
   .hero-grid{grid-template-columns:1fr;min-height:auto}
@@ -446,8 +455,10 @@ footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-it
   .apply-head{grid-template-columns:1fr}
   footer .ftop{grid-template-columns:1fr 1fr}
   .maker-grid{grid-auto-rows:50px}
+  .workshop-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:640px){
+  .workshop-grid{grid-template-columns:1fr}
   .col-6,.col-4,.col-3{grid-column:span 12}
   .apply-wrap{margin:0 -20px;padding:48px 24px 56px}
   .apply-head{margin-bottom:32px}
@@ -740,55 +751,123 @@ footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-it
     <span class="tag">Sat–Sun · Aug 8–9</span>
   </div>
 
+  <!-- Workshop card grid -->
+  <div class="workshop-grid">
+
+    <article class="card workshop-card">
+      <div class="img"><img src="images/workshop-kokedama.jpg" alt="Kokedama Workshop"></div>
+      <span class="badge">Sat, Aug 8</span>
+      <span class="fig">10:00 – 11:00 AM</span>
+      <div class="meta">
+        <div class="n">Kokedama Workshop</div>
+        <div class="t">Maya Li × Dilly Dally Fair</div>
+        <div class="price">$105 · 10 seats</div>
+        <a href="https://lu.ma/0n85mjml" target="_blank" rel="noopener" class="ticket">Register →</a>
+      </div>
+    </article>
+
+    <article class="card workshop-card">
+      <div class="img"><img src="images/workshop-watercolor.jpg" alt="Watercolor Workshop"></div>
+      <span class="badge">Sat, Aug 8</span>
+      <span class="fig">12:30 – 2:00 PM</span>
+      <div class="meta">
+        <div class="n">Watercolor Workshop</div>
+        <div class="t">Bar IQ × Dilly Dally Fair</div>
+        <div class="price">$120 · 12 seats</div>
+        <a href="https://lu.ma/a6jo3z02" target="_blank" rel="noopener" class="ticket">Register →</a>
+      </div>
+    </article>
+
+    <article class="card workshop-card">
+      <div class="img"><img src="images/workshop-clay-whistle.png" alt="Clay Whistle Workshop"></div>
+      <span class="badge">Sat, Aug 8</span>
+      <span class="fig">3:00 – 5:00 PM</span>
+      <div class="meta">
+        <div class="n">Clay Whistle Workshop</div>
+        <div class="t">Dusty.co × Dilly Dally Fair</div>
+        <div class="price">$110 · 12 seats</div>
+        <a href="https://lu.ma/i4lsnqpr" target="_blank" rel="noopener" class="ticket">Register →</a>
+      </div>
+    </article>
+
+    <article class="card workshop-card">
+      <div class="img"><img src="images/workshop-incense.png" alt="Incense Workshop"></div>
+      <span class="badge">Sun, Aug 9</span>
+      <span class="fig">10:00 – 11:30 AM</span>
+      <div class="meta">
+        <div class="n">Incense Workshop</div>
+        <div class="t">SOOM × Dilly Dally Fair</div>
+        <div class="price">$89</div>
+        <a href="https://lu.ma/7hinf7gh" target="_blank" rel="noopener" class="ticket">Register →</a>
+      </div>
+    </article>
+
+    <article class="card workshop-card">
+      <div class="img"><img src="images/workshop-kintsugi.png" alt="Break To Rebuild — Kintsugi Ritual Workshop"></div>
+      <span class="badge">Sun, Aug 9</span>
+      <span class="fig">12:30 – 3:30 PM</span>
+      <div class="meta">
+        <div class="n">Break To Rebuild</div>
+        <div class="t">A Kintsugi Ritual Workshop</div>
+        <div class="price">$300 · 10–12 seats</div>
+        <a href="https://lu.ma/bp4xbffk" target="_blank" rel="noopener" class="ticket">Register →</a>
+      </div>
+    </article>
+
+    <article class="card workshop-card">
+      <div class="img"><img src="images/workshop-needle-felting.jpg" alt="Needle Felting Workshop"></div>
+      <span class="badge">Sun, Aug 9</span>
+      <span class="fig">4:30 – 5:30 PM</span>
+      <div class="meta">
+        <div class="n">Needle Felting Workshop</div>
+        <div class="t">Clover Folk Studio × Dilly Dally Fair</div>
+        <div class="price">$65 · 10 seats</div>
+        <a href="https://lu.ma/bctsml6r" target="_blank" rel="noopener" class="ticket">Register →</a>
+      </div>
+    </article>
+
+  </div>
+
   <div class="split">
     <!-- schedule -->
     <div>
-      <div class="schedule-placeholder">
-        <div class="sp-tag">★ COMING SOON</div>
-        <div class="sp-headline">Workshops are being<br><em>quietly assembled.</em></div>
-        <div class="sp-sub">A weekend of small, hands-on sessions led by the artists themselves. </div>
-
-        <svg class="sp-art" viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <ellipse cx="110" cy="128" rx="70" ry="4" fill="#d94a1f" opacity=".18"/>
-          <rect x="74" y="98" width="72" height="22" rx="2" fill="none" stroke="#d94a1f" stroke-width="2"/>
-          <line x1="78" y1="120" x2="74" y2="128" stroke="#d94a1f" stroke-width="2" stroke-linecap="round"/>
-          <line x1="142" y1="120" x2="146" y2="128" stroke="#d94a1f" stroke-width="2" stroke-linecap="round"/>
-          <ellipse cx="110" cy="98" rx="42" ry="8" fill="none" stroke="#d94a1f" stroke-width="2"/>
-          <line x1="68" y1="98" x2="68" y2="100" stroke="#d94a1f" stroke-width="2"/>
-          <line x1="152" y1="98" x2="152" y2="100" stroke="#d94a1f" stroke-width="2"/>
-          <ellipse cx="110" cy="100" rx="42" ry="8" fill="none" stroke="#d94a1f" stroke-width="2"/>
-          <path d="M96 98 C 94 88 96 78 102 72 C 108 68 112 68 118 72 C 124 78 126 88 124 98 Z" fill="none" stroke="#d94a1f" stroke-width="2" stroke-linejoin="round"/>
-          <ellipse cx="110" cy="78" rx="11" ry="2" fill="none" stroke="#d94a1f" stroke-width="1" opacity=".7"/>
-          <circle cx="160" cy="44" r="10" fill="none" stroke="#d94a1f" stroke-width="2"/>
-          <circle cx="167" cy="36" r="3" fill="none" stroke="#d94a1f" stroke-width="2"/>
-          <path d="M160 54 C 154 62 150 72 148 84 L 158 96" fill="none" stroke="#d94a1f" stroke-width="2" stroke-linecap="round"/>
-          <path d="M160 54 C 168 60 174 70 174 84 L 168 100" fill="none" stroke="#d94a1f" stroke-width="2" stroke-linecap="round"/>
-          <path d="M156 66 C 140 70 124 76 118 80" fill="none" stroke="#d94a1f" stroke-width="2" stroke-linecap="round"/>
-          <path d="M168 66 C 152 72 134 78 122 82" fill="none" stroke="#d94a1f" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="118" cy="80" r="2" fill="#d94a1f"/>
-          <circle cx="122" cy="82" r="2" fill="#d94a1f"/>
-          <path d="M52 102 C 56 100 60 100 64 102" fill="none" stroke="#d94a1f" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
-          <path d="M156 104 C 160 102 164 102 168 104" fill="none" stroke="#d94a1f" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
-          <circle cx="50" cy="92" r="1.4" fill="#d94a1f" opacity=".7"/>
-          <circle cx="170" cy="92" r="1.4" fill="#d94a1f" opacity=".7"/>
-        </svg>
-
-        <ul class="sp-list" style="display:none">
-          <li><span class="sp-d">—</span> Incense-making · blend your own stick</li>
-          <li><span class="sp-d">—</span> Wheel-throwing, in progress</li>
-          <li><span class="sp-d">—</span> Conversation: "mid-process"</li>
-          <li><span class="sp-d">—</span> Zine swap (bring one, take one)</li>
-          <li><span class="sp-d">—</span> Tape loops &amp; field recordings, before close</li>
-        </ul>
-
-        <div class="sp-meta">
-          <div><span class="sp-k">Schedule drops</span><span class="sp-v">Mid-July 2026</span></div>
-          <div><span class="sp-k">Both days</span><span class="sp-v">Sat–Sun · Aug 8–9</span></div>
+      <div class="schedule">
+        <div class="schedule-day-label">Saturday, August 8</div>
+        <div class="row">
+          <div class="time">10:00a</div>
+          <div class="title">Kokedama Workshop<small>Maya Li · 1 hr · $105 · 10 seats</small></div>
+          <div class="where"><a href="https://lu.ma/0n85mjml" target="_blank" rel="noopener" style="color:var(--vermilion);text-decoration:none;font-size:10px;letter-spacing:.18em">Register →</a></div>
+        </div>
+        <div class="row">
+          <div class="time">12:30p</div>
+          <div class="title">Watercolor Workshop<small>Bar IQ · 90 min · $120 · 12 seats</small></div>
+          <div class="where"><a href="https://lu.ma/a6jo3z02" target="_blank" rel="noopener" style="color:var(--vermilion);text-decoration:none;font-size:10px;letter-spacing:.18em">Register →</a></div>
+        </div>
+        <div class="row">
+          <div class="time">3:00p</div>
+          <div class="title">Clay Whistle Workshop<small>Dusty.co · 2 hr · $110 · 12 seats</small></div>
+          <div class="where"><a href="https://lu.ma/i4lsnqpr" target="_blank" rel="noopener" style="color:var(--vermilion);text-decoration:none;font-size:10px;letter-spacing:.18em">Register →</a></div>
+        </div>
+        <div class="schedule-day-label" style="margin-top:20px">Sunday, August 9</div>
+        <div class="row">
+          <div class="time">10:00a</div>
+          <div class="title">Incense Workshop<small>SOOM · 90 min · $89</small></div>
+          <div class="where"><a href="https://lu.ma/7hinf7gh" target="_blank" rel="noopener" style="color:var(--vermilion);text-decoration:none;font-size:10px;letter-spacing:.18em">Register →</a></div>
+        </div>
+        <div class="row">
+          <div class="time">12:30p</div>
+          <div class="title">Break To Rebuild<small>Kintsugi Ritual · 3 hr · $300 · 10–12 seats</small></div>
+          <div class="where"><a href="https://lu.ma/bp4xbffk" target="_blank" rel="noopener" style="color:var(--vermilion);text-decoration:none;font-size:10px;letter-spacing:.18em">Register →</a></div>
+        </div>
+        <div class="row">
+          <div class="time">4:30p</div>
+          <div class="title">Needle Felting Workshop<small>Clover Folk Studio · 1 hr · $65 · 10 seats</small></div>
+          <div class="where"><a href="https://lu.ma/bctsml6r" target="_blank" rel="noopener" style="color:var(--vermilion);text-decoration:none;font-size:10px;letter-spacing:.18em">Register →</a></div>
         </div>
       </div>
     </div>
 
-    <!-- map -->
+        <!-- map -->
     <div class="map" id="map">
       <div class="compass"><div class="n">N</div><div>Midtown</div></div>
 
