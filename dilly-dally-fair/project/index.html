@@ -435,6 +435,16 @@ footer .fbrand{font-family:'Bodoni Moda',serif;font-weight:900;font-style:italic
 footer .fbrand .red{color:var(--vermilion)}
 footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);border-top:1px solid var(--rule);padding-top:18px}
 
+/* =============== MAKER ROSTER =============== */
+.roster-header{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--ink);margin-bottom:0}
+.roster-floor{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft)}
+.roster-count{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
+.maker-roster{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid var(--ink)}
+.maker-roster-item{display:flex;align-items:baseline;gap:14px;padding:14px 18px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);transition:background .12s ease}
+.maker-roster-item:hover{background:rgba(217,74,31,.05)}
+.mr-num{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--vermilion);flex:0 0 24px}
+.mr-name{font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;font-size:19px;letter-spacing:-.01em;color:var(--ink);line-height:1.2}
+
 /* =============== WORKSHOP GRID =============== */
 .workshop-card .img img{filter:none}
 .workshop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:60px}
@@ -457,9 +467,11 @@ footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-it
   footer .ftop{grid-template-columns:1fr 1fr}
   .maker-grid{grid-auto-rows:50px}
   .workshop-grid{grid-template-columns:repeat(2,1fr)}
+  .maker-roster{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:640px){
   .workshop-grid{grid-template-columns:1fr}
+  .maker-roster{grid-template-columns:1fr}
   .col-6,.col-4,.col-3{grid-column:span 12}
   .apply-wrap{margin:0 -20px;padding:48px 24px 56px}
   .apply-head{margin-bottom:32px}
@@ -645,7 +657,7 @@ footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-it
     <div class="f"><div class="n red">$0</div><div class="l">Application fee</div><div class="d">No credentials. No résumé. Just tell us what you're figuring out.</div></div>
     <div class="f"><div class="n">60<span class="red">+</span></div><div class="l">Makers selected</div><div class="d">Ceramics, scent, furniture, zines, textiles, sound, weird little things.</div></div>
     <div class="f"><div class="n">2</div><div class="l">Days · one weekend</div><div class="d">Saturday + Sunday, early August. Come early, stay late.</div></div>
-    <div class="f"><div class="n red">4</div><div class="l">Different artist workshops</div><div class="d">A hands-on invitation to try what you've always wondered about.</div></div>
+    <div class="f"><div class="n red">6</div><div class="l">Artist workshops</div><div class="d">A hands-on invitation to try what you've always wondered about.</div></div>
   </div>
 </section>
 
@@ -656,91 +668,52 @@ footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-it
     <h2>A <span class="accent">sampling</span><br>of makers.</h2>
   </div>
 
-  <div class="makers-placeholder">
-    <div class="mp-frame">
-      <div class="mp-tag">★ COMING SOON</div>
-      <div class="mp-headline">The 2026 lineup<br><em>is still being chosen.</em></div>
-      <div class="mp-sub">60+ makers will be announced through June. Working in ceramics, textile, scent, sound, furniture, zines, print, and a few weird little things we don't have a category for yet.</div>
-      <div class="mp-meta">
-        <div><span class="mp-k">Announcement</span><span class="mp-v">Rolling, June 2026</span></div>
-        <div><span class="mp-k">Notify me</span><span class="mp-v">↓ subscribe in footer</span></div>
-      </div>
-    </div>
+  <div class="roster-header">
+    <span class="roster-floor">◆ 1st Floor</span>
+    <span class="roster-count">38 vendors</span>
+  </div>
+  <div class="maker-roster">
+    <div class="maker-roster-item"><span class="mr-num">01</span><span class="mr-name">CAMP Mercantile</span></div>
+    <div class="maker-roster-item"><span class="mr-num">02</span><span class="mr-name">Unmei &amp; il Gus Bakery</span></div>
+    <div class="maker-roster-item"><span class="mr-num">03</span><span class="mr-name">Side Quest</span></div>
+    <div class="maker-roster-item"><span class="mr-num">04</span><span class="mr-name">kimpots</span></div>
+    <div class="maker-roster-item"><span class="mr-num">05</span><span class="mr-name">Jamieillustrated</span></div>
+    <div class="maker-roster-item"><span class="mr-num">06</span><span class="mr-name">Winston and Friends</span></div>
+    <div class="maker-roster-item"><span class="mr-num">07</span><span class="mr-name">Clay Matter</span></div>
+    <div class="maker-roster-item"><span class="mr-num">08</span><span class="mr-name">Bearings</span></div>
+    <div class="maker-roster-item"><span class="mr-num">09</span><span class="mr-name">SEW-X Art</span></div>
+    <div class="maker-roster-item"><span class="mr-num">10</span><span class="mr-name">Made by Ellie BKLYN</span></div>
+    <div class="maker-roster-item"><span class="mr-num">11</span><span class="mr-name">Front Porch Threads</span></div>
+    <div class="maker-roster-item"><span class="mr-num">12</span><span class="mr-name">Sleeping Dog Studio</span></div>
+    <div class="maker-roster-item"><span class="mr-num">13</span><span class="mr-name">Studio VVGG</span></div>
+    <div class="maker-roster-item"><span class="mr-num">14</span><span class="mr-name">Knotend Club</span></div>
+    <div class="maker-roster-item"><span class="mr-num">15</span><span class="mr-name">mayo mayo</span></div>
+    <div class="maker-roster-item"><span class="mr-num">16</span><span class="mr-name">The Gilded Bog</span></div>
+    <div class="maker-roster-item"><span class="mr-num">17</span><span class="mr-name">something soft</span></div>
+    <div class="maker-roster-item"><span class="mr-num">18</span><span class="mr-name">Studio Delta P</span></div>
+    <div class="maker-roster-item"><span class="mr-num">19</span><span class="mr-name">Maison Markosian</span></div>
+    <div class="maker-roster-item"><span class="mr-num">20</span><span class="mr-name">Soom Earth</span></div>
+    <div class="maker-roster-item"><span class="mr-num">21</span><span class="mr-name">Howard Fink</span></div>
+    <div class="maker-roster-item"><span class="mr-num">22</span><span class="mr-name">Bar IQ</span></div>
+    <div class="maker-roster-item"><span class="mr-num">23</span><span class="mr-name">harim1ee</span></div>
+    <div class="maker-roster-item"><span class="mr-num">24</span><span class="mr-name">Little Fish Tofu</span></div>
+    <div class="maker-roster-item"><span class="mr-num">25</span><span class="mr-name">fõu crafts</span></div>
+    <div class="maker-roster-item"><span class="mr-num">26</span><span class="mr-name">Katie Miller Costume</span></div>
+    <div class="maker-roster-item"><span class="mr-num">27</span><span class="mr-name">Le Sel Jewelry</span></div>
+    <div class="maker-roster-item"><span class="mr-num">28</span><span class="mr-name">Alex Smit Illustration</span></div>
+    <div class="maker-roster-item"><span class="mr-num">29</span><span class="mr-name">Olivia Weissflog Ceramics</span></div>
+    <div class="maker-roster-item"><span class="mr-num">30</span><span class="mr-name">Rachhcrochets</span></div>
+    <div class="maker-roster-item"><span class="mr-num">31</span><span class="mr-name">Jackie Mallon Illustration</span></div>
+    <div class="maker-roster-item"><span class="mr-num">32</span><span class="mr-name">Revised Leather</span></div>
+    <div class="maker-roster-item"><span class="mr-num">33</span><span class="mr-name">Liam’s Goods</span></div>
+    <div class="maker-roster-item"><span class="mr-num">34</span><span class="mr-name">Brdgstch</span></div>
+    <div class="maker-roster-item"><span class="mr-num">35</span><span class="mr-name">Gigi Singer NYC</span></div>
+    <div class="maker-roster-item"><span class="mr-num">36</span><span class="mr-name">Dewwis Draws</span></div>
+    <div class="maker-roster-item"><span class="mr-num">37</span><span class="mr-name">Filip Ross Moda</span></div>
+    <div class="maker-roster-item"><span class="mr-num">38</span><span class="mr-name">Dusty &amp; Co</span></div>
   </div>
 
-  <div class="maker-grid">
-
-    <article class="card m1" style="grid-row:1/9">
-      <div class="img"><img src="images/collage-fish.jpg" alt=""></div>
-      <span class="badge">Ceramics</span>
-      <span class="fig">01</span>
-      <div class="meta">
-        <div class="n">Isabel Mejía</div>
-        <div class="t">Dinnerware for impatient dinners</div>
-      </div>
-    </article>
-
-    <article class="card m2">
-      <div class="img"><img src="images/collage-profile.jpg" alt=""></div>
-      <span class="badge">Textile</span>
-      <span class="fig">02</span>
-      <div class="meta">
-        <div class="n">Jun Park</div>
-        <div class="t">Hand-dyed wall hangings</div>
-      </div>
-    </article>
-
-    <article class="card m3" style="grid-row:1/8">
-      <div class="img"><img src="images/collage-eye-hands.jpg" alt=""></div>
-      <span class="badge">Zine</span>
-      <span class="fig">03</span>
-      <div class="meta">
-        <div class="n">Hana Yoshida</div>
-        <div class="t">"Instructions for hesitating"</div>
-      </div>
-    </article>
-
-    <article class="card m4">
-      <div class="img"><img src="images/collage-cloud-swish.jpg" alt=""></div>
-      <span class="badge">Print</span>
-      <span class="fig">04</span>
-      <div class="meta">
-        <div class="n">M. Okafor Press</div>
-        <div class="t">Riso editions · limited</div>
-      </div>
-    </article>
-
-    <article class="card m5" style="grid-row:8/13">
-      <div class="img"><img src="images/collage-moons.jpg" alt=""></div>
-      <span class="badge">Scent</span>
-      <span class="fig">05</span>
-      <div class="meta">
-        <div class="n">Dora &amp; Co.</div>
-        <div class="t">Wax melted after dinner</div>
-      </div>
-    </article>
-
-    <article class="card m6" style="grid-row:9/13">
-      <div class="img"><img src="images/collage-broken.jpg" alt=""></div>
-      <span class="badge">Furniture</span>
-      <span class="fig">06</span>
-      <div class="meta">
-        <div class="n">Theo Blanchard</div>
-        <div class="t">Argues with wood · nights only</div>
-      </div>
-    </article>
-
-    <article class="card m7" style="grid-row:9/13">
-      <div class="img"><img src="images/collage-circles.jpg" alt=""></div>
-      <span class="badge">Sound</span>
-      <span class="fig">07</span>
-      <div class="meta">
-        <div class="n">HALFLIGHT</div>
-        <div class="t">Tape loops · field recordings</div>
-      </div>
-    </article>
-  </div>
-
+  <div class="maker-grid" style="display:none">
   <p style="margin-top:40px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);display:none">+ 67 more being announced through June · subscribe in footer</p>
 </section>
 
