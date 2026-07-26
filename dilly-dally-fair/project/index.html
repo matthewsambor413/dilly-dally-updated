@@ -445,6 +445,11 @@ footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-it
 .mr-num{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--vermilion);flex:0 0 24px}
 .mr-name{font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;font-size:19px;letter-spacing:-.01em;color:var(--ink);line-height:1.2}
 
+/* 2ND FLOOR VENDOR CARDS */
+.vendor-grid-2f{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:0}
+.vendor-card-2f{min-height:320px}
+.vendor-grid-2f .img img{filter:none}
+
 /* =============== WORKSHOP GRID =============== */
 .workshop-card .img img{filter:none}
 .workshop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:60px}
@@ -468,10 +473,12 @@ footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-it
   .maker-grid{grid-auto-rows:50px}
   .workshop-grid{grid-template-columns:repeat(2,1fr)}
   .maker-roster{grid-template-columns:repeat(2,1fr)}
+  .vendor-grid-2f{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:640px){
   .workshop-grid{grid-template-columns:1fr}
   .maker-roster{grid-template-columns:1fr}
+  .vendor-grid-2f{grid-template-columns:repeat(2,1fr)}
   .col-6,.col-4,.col-3{grid-column:span 12}
   .apply-wrap{margin:0 -20px;padding:48px 24px 56px}
   .apply-head{margin-bottom:32px}
@@ -713,8 +720,57 @@ footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-it
     <div class="maker-roster-item"><span class="mr-num">38</span><span class="mr-name">Dusty &amp; Co</span></div>
   </div>
 
-  <div class="maker-grid" style="display:none">
-  <p style="margin-top:40px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);display:none">+ 67 more being announced through June · subscribe in footer</p>
+  <div class="roster-header" style="margin-top:60px">
+    <span class="roster-floor">◆ 2nd Floor — Furniture &amp; Sculpture</span>
+    <span class="roster-count">7 artists</span>
+  </div>
+  <div class="vendor-grid-2f">
+
+    <article class="card vendor-card-2f">
+      <div class="img"><img src="images/vendor-2f-christian-borger.png" alt="Christian Borger"></div>
+      <span class="badge">2nd Floor</span>
+      <div class="meta"><div class="n">Christian Borger</div></div>
+    </article>
+
+    <article class="card vendor-card-2f">
+      <div class="img"><img src="images/vendor-2f-will-zhang.png" alt="Will Zhang"></div>
+      <span class="badge">2nd Floor</span>
+      <div class="meta"><div class="n">Will Zhang</div></div>
+    </article>
+
+    <article class="card vendor-card-2f">
+      <div class="img"><img src="images/vendor-2f-solmistudio.png" alt="SOLMISTUDIO"></div>
+      <span class="badge">2nd Floor</span>
+      <div class="meta"><div class="n">SOLMISTUDIO</div></div>
+    </article>
+
+    <article class="card vendor-card-2f">
+      <div class="img"><img src="images/vendor-2f-bumki-song.png" alt="Bumki Song"></div>
+      <span class="badge">2nd Floor</span>
+      <div class="meta"><div class="n">Bumki Song</div></div>
+    </article>
+
+    <article class="card vendor-card-2f">
+      <div class="img"><img src="images/vendor-2f-amanda-yoder.jpg" alt="Amanda Yoder"></div>
+      <span class="badge">2nd Floor</span>
+      <div class="meta"><div class="n">Amanda Yoder</div></div>
+    </article>
+
+    <article class="card vendor-card-2f">
+      <div class="img"><img src="images/vendor-2f-ikomax-studio.png" alt="Ikomax Studio"></div>
+      <span class="badge">2nd Floor</span>
+      <div class="meta"><div class="n">Ikomax Studio</div></div>
+    </article>
+
+    <article class="card vendor-card-2f">
+      <div class="img"><img src="images/vendor-2f-studio-wenjue-lu.png" alt="Studio Wenjüe Lu"></div>
+      <span class="badge">2nd Floor</span>
+      <div class="meta"><div class="n">Studio Wenjüe Lu</div></div>
+    </article>
+
+  </div>
+
+  <div class="maker-grid" style="display:none"></div>
 </section>
 
 <!-- SCHEDULE + MAP -->
