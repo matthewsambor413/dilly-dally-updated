@@ -515,7 +515,7 @@ footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-it
     <li><a href="#schedule">Workshop schedule</a></li>
     <li><a href="#apply">Maker application</a></li>
   </ul>
-  <div class="stamp"><span class="blink"></span> Applications open</div>
+  <div class="stamp">Applications closed</div>
 </nav>
 
 <!-- TICKER -->
@@ -524,13 +524,13 @@ footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-it
     <span>Aug 8–9, 2026</span>
     <span>15 E 40th St, New York NY</span>
     <span>Free entry · pay what you can</span>
-    <span>Applications close July 20, 2026</span>
+    <span>Applications closed</span>
     <span>No credentials required</span>
     <span>Come dilly dally</span>
     <span>Aug 8–9, 2026</span>
     <span>15 E 40th St, New York NY</span>
     <span>Free entry · pay what you can</span>
-    <span>Applications close July 20, 2026</span>
+    <span>Applications closed</span>
     <span>No credentials required</span>
     <span>Come dilly dally</span>
   </div>
@@ -581,7 +581,7 @@ footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-it
       </div>
 
       <div class="hero-ctas">
-        <a class="btn primary" href="#apply">Apply to booth <span class="arr">→</span></a>
+        <a class="btn primary" href="#makers">Meet the makers <span class="arr">→</span></a>
         <a class="btn" href="#makers">See who's coming</a>
       </div>
     </div>
@@ -618,7 +618,7 @@ footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-it
 
       <!-- handwritten labels -->
       <div class="hand-label" style="left:38%;top:4%;transform:rotate(-6deg)">come <span class="pink">dilly</span></div>
-      <div class="hand-label" style="right:12%;top:54%;transform:rotate(5deg);font-size:28px">↙ <span class="pink">apply</span></div>
+      <div class="hand-label" style="right:12%;top:54%;transform:rotate(5deg);font-size:28px">↙ <span class="pink">makers</span></div>
       <div class="hand-label" style="left:4%;top:82%;transform:rotate(-4deg);font-size:18px">— organized by a maker,<br>for makers</div>
 
       <!-- SVG scribble arrow -->
@@ -1023,13 +1023,13 @@ footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-it
         <p class="note">
           We select on curiosity and care —
           <em>what are you in the middle of?</em>
-          <br><br>Deadline · <strong style="color:var(--vermilion)">July 20, 2026 · 11:59 PM ET</strong>
+          <br><br>Applications for August 2026 are now <strong style="color:var(--vermilion)">closed</strong>. Thank you to everyone who applied.
         </p>
       </div>
     </div>
 
     <!-- FORM -->
-    <form class="form-grid" id="apply-form" novalidate autocomplete="off">
+    <form class="form-grid" id="apply-form" novalidate autocomplete="off" style="display:none">
       <!-- Web3Forms required hidden fields -->
       <input type="hidden" name="access_key" id="w3f-key" value="">
       <input type="hidden" name="subject" value="New Dilly Dally Fair application">
@@ -1125,11 +1125,10 @@ footer .fbot{margin-top:60px;display:flex;justify-content:space-between;align-it
       </div>
     </form>
 
-    <!-- SUCCESS -->
-    <div class="success" id="success">
-      <h3>Received. <span class="red">Thank you.</span></h3>
-      <p>We read every application ourselves. You'll hear back from a real human within <strong>10 days</strong>. In the meantime: keep dilly-dallying.</p>
-      <p class="ref" id="ref">REF · —</p>
+    <!-- SUCCESS / CLOSED -->
+    <div class="success" id="success" style="display:block">
+      <h3>Applications are <span class="red">closed.</span></h3>
+      <p>We’ve made our selections for August 2026. Thank you to everyone who applied — stay tuned for future fairs.</p>
     </div>
 
   </div>
